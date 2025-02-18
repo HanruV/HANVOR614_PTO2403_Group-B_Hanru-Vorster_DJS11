@@ -1,7 +1,7 @@
 export default function Footer() {
   const styles = {
     width: "100%",
-    height: "60px",
+    height: "30px",
     backgroundColor: "#1a1a1a",
     position: "fixed",
     bottom: 0,

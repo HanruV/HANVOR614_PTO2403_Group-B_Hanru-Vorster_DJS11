@@ -52,8 +52,9 @@ export default function ShowList() {
       // Fetch podcast data from the API
       const response = await fetch("https://podcast-api.netlify.app");
       const data = await response.json();
-      // Update state with fetched shows
-      setShows(data);
+      // Sort the shows alphabetically by title before setting state
+      const sortedShows = data.sort((a, b) => a.title.localeCompare(b.title));
+      setShows(sortedShows);
     };
 
     fetchShows();
