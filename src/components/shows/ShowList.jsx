@@ -30,18 +30,32 @@ const styles = {
 };
 
 export default function ShowList() {
-  // state for shows
+  // State to store the list of podcast shows
   const [shows, setShows] = useState([]);
 
-  // fetching and storing shows/genres
+  // Mapping of genre IDs to their display titles
+  const GENRE_MAP = {
+    1: { title: "Personal Growth" },
+    2: { title: "Investigative Journalism" },
+    3: { title: "History" },
+    4: { title: "Comedy" },
+    5: { title: "Entertainment" },
+    6: { title: "Business" },
+    7: { title: "Fiction" },
+    8: { title: "News" },
+    9: { title: "Kids and Family" },
+  };
+
+  // Fetch shows data when component mounts
   useEffect(() => {
     const fetchShows = async () => {
-      //shows
+      // Fetch podcast data from the API
       const response = await fetch("https://podcast-api.netlify.app");
       const data = await response.json();
-      const sortedData = data.sort((a, b) => a.title.localeCompare(b.title));
-      setShows(sortedData);
+      // Update state with fetched shows
+      setShows(data);
     };
+
     fetchShows();
   }, []);
 
@@ -54,6 +68,16 @@ export default function ShowList() {
             <img src={show.image} alt={show.title} style={styles.image} />
             <div style={styles.content}>
               <h3>{show.title}</h3>
+              <p>
+                Genres:{" "}
+                {show.genres
+                  // Convert each genre ID to its corresponding title using GENRE_MAP
+                  .map((genreId) => GENRE_MAP[genreId]?.title)
+                  // Remove any undefined values (in case of unknown genre IDs)
+                  .filter(Boolean)
+                  // Join all genre titles with commas and spaces
+                  .join(", ")}
+              </p>
               <p>Seasons: {show.seasons}</p>
               <p>Last Updated: {new Date(show.updated).toLocaleDateString()}</p>
             </div>
