@@ -50,11 +50,11 @@ export default function ShowList() {
                   // Join all genre titles with commas and spaces
                   .join(", ")}
               </p>
-              <p className="show-info">
-                Seasons: {show.seasons} • Updated:{" "}
-                {new Date(show.updated).toLocaleDateString()}
-              </p>
+              <p className="show-info">Seasons: {show.seasons}</p>
             </div>
+            <p className="show-date">
+              Updated: {new Date(show.updated).toLocaleDateString()}
+            </p>
           </div>
         ))}
       </div>
