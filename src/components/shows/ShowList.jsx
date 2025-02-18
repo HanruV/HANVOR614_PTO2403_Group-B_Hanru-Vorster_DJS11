@@ -30,13 +30,17 @@ const styles = {
 };
 
 export default function ShowList() {
+  // state for shows
   const [shows, setShows] = useState([]);
 
+  // fetching and storing shows/genres
   useEffect(() => {
     const fetchShows = async () => {
+      //shows
       const response = await fetch("https://podcast-api.netlify.app");
       const data = await response.json();
-      setShows(data);
+      const sortedData = data.sort((a, b) => a.title.localeCompare(b.title));
+      setShows(sortedData);
     };
     fetchShows();
   }, []);
