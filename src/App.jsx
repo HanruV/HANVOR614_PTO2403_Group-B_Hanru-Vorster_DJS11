@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./styles.css";
+import ShowList from "./components/shows/ShowList";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           }
         />
       </Routes>
+      <ShowList />
     </BrowserRouter>
   );
 }
