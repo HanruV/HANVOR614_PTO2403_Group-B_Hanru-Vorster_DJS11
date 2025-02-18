@@ -41,7 +41,7 @@ export default function ShowList() {
             <div className="show-content">
               <h3 className="show-title">{show.title}</h3>
               <p className="show-info">
-                Genres:{" "}
+                <span className="card-sub-heading">Genres:</span>{" "}
                 {show.genres
                   // Convert each genre ID to its corresponding title using GENRE_MAP
                   .map((genreId) => GENRE_MAP[genreId]?.title)
@@ -50,10 +50,14 @@ export default function ShowList() {
                   // Join all genre titles with commas and spaces
                   .join(", ")}
               </p>
-              <p className="show-info">Seasons: {show.seasons}</p>
+              <p className="show-info">
+                <span className="card-sub-heading">Seasons:</span>{" "}
+                {show.seasons}
+              </p>
             </div>
             <p className="show-date">
-              Updated: {new Date(show.updated).toLocaleDateString()}
+              <span className="card-sub-heading">Updated:</span>{" "}
+              {new Date(show.updated).toLocaleDateString()}
             </p>
           </div>
         ))}

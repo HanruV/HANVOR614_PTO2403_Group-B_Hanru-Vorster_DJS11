@@ -189,6 +189,7 @@ button:focus-visible {
   margin-bottom: calc(40px + 1rem);
   background-color: #1f1f1f;
   overflow-y: auto;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .all-show-details-container {
@@ -202,6 +203,7 @@ button:focus-visible {
   margin-left: 0.5rem;
   margin-bottom: calc(40px + 1rem);
   background-color: #1f1f1f;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .all-show-details-container > h2 {
@@ -223,6 +225,10 @@ button:focus-visible {
   padding-left: 20px;
   padding-bottom: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header > h1 {
+  font-size: 2rem;
 }
 
 /* Footer Styles */
@@ -247,7 +253,7 @@ button:focus-visible {
 }
 
 .show-card {
-  border: 1px solid #ddd;
+  border: none;
   border-radius: 8px;
   overflow: hidden;
   padding: 0.5rem;
@@ -256,6 +262,12 @@ button:focus-visible {
   height: 100px;
   align-items: center;
   position: relative;
+  background-color: #1a1a1a;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-sub-heading {
+  color: #ddd;
 }
 
 .show-image {
