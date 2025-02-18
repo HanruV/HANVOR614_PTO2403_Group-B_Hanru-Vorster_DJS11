@@ -117,3 +117,11 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+/* Add this new class */
+.main-content {
+  flex: 1; /* This allows the main content to take up the remaining space */
+  display: flex;
+  align-items: center; /* Center content vertically */
+  justify-content: center; /* Center content horizontally */
+}
