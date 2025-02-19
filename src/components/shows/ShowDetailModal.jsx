@@ -10,9 +10,11 @@ export default function ShowDetailModal({ onClose, show }) {
           e.stopPropagation();
         }}
       >
-        <h2>Show Details</h2>
-        <h3>{show.title}</h3>
-        <img src={show.image} />
+        <h2>Show Details: {show.title}</h2>
+        <div
+          className="modal-image-background"
+          style={{ backgroundImage: `url(${show.image})` }}
+        ></div>
         <p>{show.description}</p>
       </div>
     </div>
