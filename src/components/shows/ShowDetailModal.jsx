@@ -1,6 +1,21 @@
 import PropTypes from "prop-types";
+import { useState, useEffect } from "react";
 
-export default function ShowDetailModal({ onClose, show }) {
+export default function ShowDetailModal({ onClose, showId }) {
+  const [showDetails, setShowDetails] = useState(null);
+
+  useEffect(() => {
+    const fetchShowDetails = async () => {
+      const response = await fetch(
+        `https://podcast-api.netlify.app/id/${showId}`
+      );
+      const data = await response.json();
+      setShowDetails(data);
+    };
+
+    fetchShowDetails();
+  }, [showId]);
+
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div
@@ -10,12 +25,12 @@ export default function ShowDetailModal({ onClose, show }) {
           e.stopPropagation();
         }}
       >
-        <h2>Show Details: {show.title}</h2>
+        <h2>Show Details: {showDetails?.title}</h2>
         <div
           className="modal-image-background"
-          style={{ backgroundImage: `url(${show.image})` }}
+          style={{ backgroundImage: `url(${showDetails?.image})` }}
         ></div>
-        <p>{show.description}</p>
+        <p>{showDetails?.description}</p>
       </div>
     </div>
   );
@@ -23,11 +38,5 @@ export default function ShowDetailModal({ onClose, show }) {
 
 ShowDetailModal.propTypes = {
   onClose: PropTypes.func.isRequired,
-  show: PropTypes.shape({
-    image: PropTypes.shape({
-      image: PropTypes.string,
-    }),
-    title: PropTypes.string,
-    description: PropTypes.string,
-  }),
+  showId: PropTypes.string.isRequired,
 };

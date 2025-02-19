@@ -9,9 +9,7 @@ export default function ShowList() {
   // State for sorting the list
   const [sortOrder, setSortOrder] = useState("asc");
   // State to store the currently selected show
-  const [selectedShow, setSelectedShow] = useState(null);
-  // State to manage the visibility of the modal
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedShowId, setSelectedShowId] = useState(null);
 
   // Fetch shows data when component mounts
   useEffect(() => {
@@ -44,14 +42,6 @@ export default function ShowList() {
     sortShows(shows, newOrder); // Sort the shows list based on the new order
   };
 
-  // Function to handle the click event on a show card
-  const handleShowClick = (show) => {
-    // Update the selected show state with the clicked show
-    setSelectedShow(show);
-    // Open the modal by setting isModalOpen to true
-    setIsModalOpen(true);
-  };
-
   return (
     <div>
       <div className="shows-header">
@@ -63,7 +53,7 @@ export default function ShowList() {
           <div
             key={show.id}
             className="show-card"
-            onClick={() => handleShowClick(show)}
+            onClick={() => setSelectedShowId(show.id)}
             style={{ cursor: "pointer" }}
           >
             <img src={show.image} alt={show.title} className="show-image" />
@@ -91,11 +81,10 @@ export default function ShowList() {
           </div>
         ))}
       </div>
-      {/* Render the modal if it is open */}
-      {isModalOpen && (
+      {selectedShowId && (
         <ShowDetailModal
-          show={selectedShow}
-          onClose={() => setIsModalOpen(false)}
+          showId={selectedShowId}
+          onClose={() => setSelectedShowId(null)}
         />
       )}
     </div>
