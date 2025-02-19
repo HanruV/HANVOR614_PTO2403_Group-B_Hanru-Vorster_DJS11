@@ -367,3 +367,31 @@ button:focus-visible {
   background-repeat: no-repeat;
   background-color: #1a1a1a;
 }
+
+.modal-content p {
+  max-height: 150px;
+  overflow-y: auto;
+  padding: 10px;
+  background-color: #242424;
+  border-radius: 8px;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.modal-content p::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-content p::-webkit-scrollbar-track {
+  background: #1a1a1a;
+  border-radius: 4px;
+}
+
+.modal-content p::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.modal-content p::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
