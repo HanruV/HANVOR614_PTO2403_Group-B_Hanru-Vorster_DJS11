@@ -10,6 +10,8 @@ export default function ShowList() {
   const [sortOrder, setSortOrder] = useState("asc");
   // State to store the currently selected show
   const [selectedShowId, setSelectedShowId] = useState(null);
+  // State to track loading status
+  const [isLoading, setIsLoading] = useState(true); // Initialize loading state
 
   // Fetch shows data when component mounts
   useEffect(() => {
@@ -17,6 +19,7 @@ export default function ShowList() {
       const response = await fetch("https://podcast-api.netlify.app");
       const data = await response.json();
       sortShows(data, sortOrder);
+      setIsLoading(false); // Set loading to false after data is fetched
     };
 
     fetchShows();
@@ -49,37 +52,41 @@ export default function ShowList() {
         <SortButton currentOrder={sortOrder} onToggle={handleSortToggle} />
       </div>
       <div className="show-list-grid">
-        {shows.map((show) => (
-          <div
-            key={show.id}
-            className="show-card"
-            onClick={() => setSelectedShowId(show.id)}
-            style={{ cursor: "pointer" }}
-          >
-            <img src={show.image} alt={show.title} className="show-image" />
-            <div className="show-content">
-              <h3 className="show-title">{show.title}</h3>
-              <p className="show-info">
-                <span className="card-sub-heading">Genres:</span>{" "}
-                {show.genres
-                  // Convert each genre ID to its corresponding title using GENRE_MAP
-                  .map((genreId) => GENRE_MAP[genreId]?.title)
-                  // Remove any undefined values (in case of unknown genre IDs)
-                  .filter(Boolean)
-                  // Join all genre titles with commas and spaces
-                  .join(", ")}
-              </p>
-              <p className="show-info">
-                <span className="card-sub-heading">Seasons:</span>{" "}
-                {show.seasons}
+        {isLoading ? ( // Check if loading
+          <p>Shows Loading...</p> // Display loading message
+        ) : (
+          shows.map((show) => (
+            <div
+              key={show.id}
+              className="show-card"
+              onClick={() => setSelectedShowId(show.id)}
+              style={{ cursor: "pointer" }}
+            >
+              <img src={show.image} alt={show.title} className="show-image" />
+              <div className="show-content">
+                <h3 className="show-title">{show.title}</h3>
+                <p className="show-info">
+                  <span className="card-sub-heading">Genres:</span>{" "}
+                  {show.genres
+                    // Convert each genre ID to its corresponding title using GENRE_MAP
+                    .map((genreId) => GENRE_MAP[genreId]?.title)
+                    // Remove any undefined values (in case of unknown genre IDs)
+                    .filter(Boolean)
+                    // Join all genre titles with commas and spaces
+                    .join(", ")}
+                </p>
+                <p className="show-info">
+                  <span className="card-sub-heading">Seasons:</span>{" "}
+                  {show.seasons}
+                </p>
+              </div>
+              <p className="show-date">
+                <span className="card-sub-heading">Updated:</span>{" "}
+                {new Date(show.updated).toLocaleDateString()}
               </p>
             </div>
-            <p className="show-date">
-              <span className="card-sub-heading">Updated:</span>{" "}
-              {new Date(show.updated).toLocaleDateString()}
-            </p>
-          </div>
-        ))}
+          ))
+        )}
       </div>
       {selectedShowId && (
         <ShowDetailModal

@@ -3,15 +3,18 @@ import { useState, useEffect } from "react";
 
 export default function ShowDetailModal({ onClose, showId }) {
   const [showDetails, setShowDetails] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   //fetches show details data from api dynamically with the showID prop
   useEffect(() => {
     const fetchShowDetails = async () => {
+      setIsLoading(true);
       const response = await fetch(
         `https://podcast-api.netlify.app/id/${showId}`
       );
       const data = await response.json();
       setShowDetails(data);
+      setIsLoading(false);
     };
 
     fetchShowDetails();
@@ -26,13 +29,19 @@ export default function ShowDetailModal({ onClose, showId }) {
           e.stopPropagation();
         }}
       >
-        <h2>Show Details: {showDetails?.title}</h2>
-        <div
-          className="modal-image-background"
-          style={{ backgroundImage: `url(${showDetails?.image})` }}
-        ></div>
-        <h3 className="modal-description-heading">Description</h3>
-        <p>{showDetails?.description}</p>
+        {isLoading ? (
+          <h2>Details Loading...</h2>
+        ) : (
+          <>
+            <h2>Show Details: {showDetails?.title}</h2>
+            <div
+              className="modal-image-background"
+              style={{ backgroundImage: `url(${showDetails?.image})` }}
+            ></div>
+            <h3 className="modal-description-heading">Description</h3>
+            <p>{showDetails?.description}</p>
+          </>
+        )}
       </div>
     </div>
   );
