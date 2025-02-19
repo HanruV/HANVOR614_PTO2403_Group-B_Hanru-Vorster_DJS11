@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 export default function ShowDetailModal({ onClose, showId }) {
   const [showDetails, setShowDetails] = useState(null);
 
+  //fetches show details data from api dynamically with the showID prop
   useEffect(() => {
     const fetchShowDetails = async () => {
       const response = await fetch(
