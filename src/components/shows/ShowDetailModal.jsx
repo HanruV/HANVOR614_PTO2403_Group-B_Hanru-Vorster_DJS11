@@ -9,12 +9,21 @@ export default function ShowDetailModal({ onClose, showId }) {
   useEffect(() => {
     const fetchShowDetails = async () => {
       setIsLoading(true);
-      const response = await fetch(
-        `https://podcast-api.netlify.app/id/${showId}`
-      );
-      const data = await response.json();
-      setShowDetails(data);
-      setIsLoading(false);
+      try {
+        const response = await fetch(
+          `https://podcast-api.netlify.app/id/${showId}`
+        );
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        setShowDetails(data);
+      } catch (error) {
+        console.error("Failed to fetch show details:", error);
+        setShowDetails(null);
+      } finally {
+        setIsLoading(false);
+      }
     };
 
     fetchShowDetails();
@@ -31,15 +40,17 @@ export default function ShowDetailModal({ onClose, showId }) {
       >
         {isLoading ? (
           <h2>Details Loading...</h2>
+        ) : !showDetails ? (
+          <h2>Failed to get details, re-open the show please</h2>
         ) : (
           <>
-            <h2>Show Details: {showDetails?.title}</h2>
+            <h2 className="show-title">Show Details: {showDetails.title}</h2>
             <div
               className="modal-image-background"
-              style={{ backgroundImage: `url(${showDetails?.image})` }}
+              style={{ backgroundImage: `url(${showDetails.image})` }}
             ></div>
             <h3 className="modal-description-heading">Description</h3>
-            <p>{showDetails?.description}</p>
+            <p>{showDetails.description}</p>
           </>
         )}
       </div>

@@ -6,20 +6,31 @@ import ShowDetailModal from "./ShowDetailModal";
 export default function ShowList() {
   // State to store the list of podcast shows
   const [shows, setShows] = useState([]);
-  // State for sorting the list
+  // State to sort the list
   const [sortOrder, setSortOrder] = useState("asc");
   // State to store the currently selected show
   const [selectedShowId, setSelectedShowId] = useState(null);
   // State to track loading status
   const [isLoading, setIsLoading] = useState(true); // Initialize loading state
+  // State to track error message
+  const [errorMessage, setErrorMessage] = useState(null); // Initialize error message state
 
   // Fetch shows data when component mounts
   useEffect(() => {
     const fetchShows = async () => {
-      const response = await fetch("https://podcast-api.netlify.app");
-      const data = await response.json();
-      sortShows(data, sortOrder);
-      setIsLoading(false); // Set loading to false after data is fetched
+      try {
+        const response = await fetch("https://podcast-api.netlify.app");
+        if (!response.ok) {
+          // Check if the response is not ok
+          throw new Error("Network response was not ok"); // Throw an error if response is not ok
+        }
+        const data = await response.json();
+        sortShows(data, sortOrder);
+      } catch {
+        setErrorMessage("Something went wrong, reload the page"); // Set error message state
+      } finally {
+        setIsLoading(false); // Set loading to false after data is fetched or an error occurs
+      }
     };
 
     fetchShows();
@@ -54,6 +65,8 @@ export default function ShowList() {
       <div className="show-list-grid">
         {isLoading ? ( // Check if loading
           <p>Shows Loading...</p> // Display loading message
+        ) : errorMessage ? ( // Check if there is an error message
+          <p>{errorMessage}</p> // Display error message
         ) : (
           shows.map((show) => (
             <div
