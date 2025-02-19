@@ -347,6 +347,7 @@ button:focus-visible {
   border-radius: 8px;
   width: 90%;
   max-width: 600px;
+  height: 400px; /* Set fixed height */
 }
 
 .modal-content img {
