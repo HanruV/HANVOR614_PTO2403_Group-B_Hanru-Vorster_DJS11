@@ -2,7 +2,7 @@ import "./styles.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ShowsSection from "./components/shows/ShowsSection";
-import MusicPlayer from "./components/musicPlayer/musicPlayer";
+import MusicPlayer from "./components/musicPlayer/MusicPlayer";
 
 function App() {
   return (
