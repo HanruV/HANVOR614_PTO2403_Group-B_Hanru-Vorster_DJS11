@@ -1,23 +1,11 @@
 import { useState, useEffect } from "react";
 import SortButton from "../common/SortButton";
+import { GENRE_MAP } from "../../constants/genres";
 
 export default function ShowList() {
   // State to store the list of podcast shows
   const [shows, setShows] = useState([]);
   const [sortOrder, setSortOrder] = useState("asc"); // State for sorting the list
-
-  // Mapping of genre IDs to their display titles
-  const GENRE_MAP = {
-    1: { title: "Personal Growth" },
-    2: { title: "Investigative Journalism" },
-    3: { title: "History" },
-    4: { title: "Comedy" },
-    5: { title: "Entertainment" },
-    6: { title: "Business" },
-    7: { title: "Fiction" },
-    8: { title: "News" },
-    9: { title: "Kids and Family" },
-  };
 
   // Fetch shows data when component mounts
   useEffect(() => {
