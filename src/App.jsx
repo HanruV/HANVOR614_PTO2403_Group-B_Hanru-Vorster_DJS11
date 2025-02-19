@@ -1,13 +1,19 @@
 import "./styles.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import MainContent from "./components/MainContent";
+import ShowsSection from "./components/shows/ShowsSection";
+import MusicPlayer from "./components/musicPlayer/musicPlayer";
 
 function App() {
   return (
     <>
       <Header />
-      <MainContent />
+      <main className="main-content">
+        <ShowsSection />
+        <section className="player-container">
+          <MusicPlayer />
+        </section>
+      </main>
       <Footer />
     </>
   );

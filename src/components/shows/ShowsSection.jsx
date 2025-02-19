@@ -1,5 +1,5 @@
 import ShowList from "./ShowList";
-import ShowDetails from "./ShowDetails";
+import SuggestedShows from "./SuggestedShows";
 
 const ShowsSection = () => {
   return (
@@ -9,7 +9,7 @@ const ShowsSection = () => {
         {/* <Favorites /> */}
       </div>
       <div className="all-show-details-container">
-        <ShowDetails />
+        <SuggestedShows />
       </div>
     </section>
   );
