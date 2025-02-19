@@ -1,11 +1,17 @@
 import { useState, useEffect } from "react";
 import SortButton from "../common/SortButton";
 import { GENRE_MAP } from "../../constants/genres";
+import ShowDetailModal from "./ShowDetailModal";
 
 export default function ShowList() {
   // State to store the list of podcast shows
   const [shows, setShows] = useState([]);
-  const [sortOrder, setSortOrder] = useState("asc"); // State for sorting the list
+  // State for sorting the list
+  const [sortOrder, setSortOrder] = useState("asc");
+  // State to store the currently selected show
+  const [selectedShow, setSelectedShow] = useState(null);
+  // State to manage the visibility of the modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Fetch shows data when component mounts
   useEffect(() => {
@@ -18,6 +24,7 @@ export default function ShowList() {
     fetchShows();
   }, [sortOrder]);
 
+  // Sort the shows list based on the sort order
   const sortShows = (data, order) => {
     const sortedShows = [...data].sort((a, b) => {
       if (order === "asc") {
@@ -37,6 +44,14 @@ export default function ShowList() {
     sortShows(shows, newOrder); // Sort the shows list based on the new order
   };
 
+  // Function to handle the click event on a show card
+  const handleShowClick = (show) => {
+    // Update the selected show state with the clicked show
+    setSelectedShow(show);
+    // Open the modal by setting isModalOpen to true
+    setIsModalOpen(true);
+  };
+
   return (
     <div>
       <div className="shows-header">
@@ -45,7 +60,12 @@ export default function ShowList() {
       </div>
       <div className="show-list-grid">
         {shows.map((show) => (
-          <div key={show.id} className="show-card">
+          <div
+            key={show.id}
+            className="show-card"
+            onClick={() => handleShowClick(show)}
+            style={{ cursor: "pointer" }}
+          >
             <img src={show.image} alt={show.title} className="show-image" />
             <div className="show-content">
               <h3 className="show-title">{show.title}</h3>
@@ -71,6 +91,13 @@ export default function ShowList() {
           </div>
         ))}
       </div>
+      {/* Render the modal if it is open */}
+      {isModalOpen && (
+        <ShowDetailModal
+          show={selectedShow}
+          onClose={() => setIsModalOpen(false)}
+        />
+      )}
     </div>
   );
 }
