@@ -31,6 +31,7 @@ export default function ShowDetailModal({ onClose, showId }) {
           className="modal-image-background"
           style={{ backgroundImage: `url(${showDetails?.image})` }}
         ></div>
+        <h3 className="modal-description-heading">Description</h3>
         <p>{showDetails?.description}</p>
       </div>
     </div>
