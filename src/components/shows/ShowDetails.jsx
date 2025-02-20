@@ -1,19 +1,23 @@
-import PropTypes from "prop-types";
+import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import ShowDetailsNav from "../navigation/ShowDetailsNav";
 
-export default function ShowDetails({ showId, onBack }) {
-  // State to hold show details and loading status
+export default function ShowDetails() {
+  // Extracts the 'id' from the '/show/:id' route
+  const { id } = useParams();
+  // Used to navigate between routes without user clicking links
+  const navigate = useNavigate();
+
   const [showDetails, setShowDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Function to fetch show details from the API
     const fetchShowDetails = async () => {
       setIsLoading(true);
       try {
+        // Use the id from URL parameters to fetch specific show details
         const response = await fetch(
-          `https://podcast-api.netlify.app/id/${showId}`
+          `https://podcast-api.netlify.app/id/${id}`
         );
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -21,11 +25,7 @@ export default function ShowDetails({ showId, onBack }) {
         const data = await response.json();
         setShowDetails(data);
       } catch (error) {
-        console.error(
-          "Failed to fetch show details, please reload a show:",
-          error.message,
-          error.stack
-        );
+        console.error("Failed to fetch show details:", error.message);
         setShowDetails(null);
       } finally {
         setIsLoading(false);
@@ -33,18 +33,22 @@ export default function ShowDetails({ showId, onBack }) {
     };
 
     fetchShowDetails();
-  }, [showId]);
+  }, [id]); // Re-fetch when id changes in URL
+
+  // Navigation handler to return to home page
+  const handleBack = () => {
+    navigate("/");
+  };
 
   return (
     <div className="show-details">
-      <ShowDetailsNav onBack={onBack} />
+      <ShowDetailsNav onBack={handleBack} />
       {isLoading ? (
         <h2>Details Loading...</h2>
       ) : !showDetails ? (
-        <h2>Failed to fetch show details, please reload a show.</h2>
+        <h2>Failed to fetch show details, please try again.</h2>
       ) : (
         <>
-          {/* Displaying show title and image */}
           <h2 className="show-title">Show Details: {showDetails.title}</h2>
           <div
             className="show-image-background"
@@ -57,9 +61,3 @@ export default function ShowDetails({ showId, onBack }) {
     </div>
   );
 }
-
-// PropTypes for type checking the component's props
-ShowDetails.propTypes = {
-  showId: PropTypes.string.isRequired,
-  onBack: PropTypes.func.isRequired,
-};

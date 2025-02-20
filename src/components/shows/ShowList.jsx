@@ -1,15 +1,14 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import SortButton from "../common/SortButton";
 import { GENRE_MAP } from "../../constants/genres";
-import ShowDetails from "./ShowDetails";
 
 export default function ShowList() {
+  const navigate = useNavigate();
   // State to store the list of podcast shows
   const [shows, setShows] = useState([]);
   // State to sort the list
   const [sortOrder, setSortOrder] = useState("asc");
-  // State to store the currently selected show
-  const [selectedShowId, setSelectedShowId] = useState(null);
   // State to track loading status
   const [isLoading, setIsLoading] = useState(true); // Initialize loading state
   // State to track error message
@@ -56,64 +55,58 @@ export default function ShowList() {
     sortShows(shows, newOrder); // Sort the shows list based on the new order
   };
 
+  // Handler for show click events
+  // Uses navigate to change routes
+  const handleShowClick = (showId) => {
+    // Navigate to the show details route with the specific show ID
+    navigate(`/show/${showId}`);
+  };
+
   return (
     <div>
-      {selectedShowId ? (
-        <ShowDetails
-          showId={selectedShowId}
-          onBack={() => setSelectedShowId(null)}
-        />
-      ) : (
-        <>
-          <div className="shows-header">
-            <h2>All Shows</h2>
-            <SortButton currentOrder={sortOrder} onToggle={handleSortToggle} />
-          </div>
-          <div className="show-list-grid">
-            {isLoading ? (
-              <p>Shows Loading...</p>
-            ) : errorMessage ? (
-              <p>{errorMessage}</p>
-            ) : (
-              shows.map((show) => (
-                <div
-                  key={show.id}
-                  className="show-card"
-                  onClick={() => setSelectedShowId(show.id)}
-                  style={{ cursor: "pointer" }}
-                >
-                  <img
-                    src={show.image}
-                    alt={show.title}
-                    className="show-image"
-                  />
-                  <div className="show-content">
-                    <h3 className="show-title">{show.title}</h3>
-                    <p className="show-info">
-                      <span className="card-sub-heading">Genres:</span>{" "}
-                      {show.genres
-                        // Convert each genre ID to its corresponding title using GENRE_MAP
-                        .map((genreId) => GENRE_MAP[genreId]?.title)
-                        // Remove any undefined values (in case of unknown genre IDs)
-                        .filter(Boolean)
-                        // Join all genre titles with commas and spaces
-                        .join(", ")}
-                    </p>
-                    <p className="show-info">
-                      <span className="card-sub-heading">Seasons:</span>{" "}
-                      {show.seasons}
-                    </p>
-                  </div>
-                  <p className="show-date">
-                    <span className="card-sub-heading">Updated:</span>{" "}
-                    {new Date(show.updated).toLocaleDateString()}
-                  </p>
-                </div>
-              ))
-            )}
-          </div>
-        </>
-      )}
+      <div className="shows-header">
+        <h2>All Shows</h2>
+        <SortButton currentOrder={sortOrder} onToggle={handleSortToggle} />
+      </div>
+      <div className="show-list-grid">
+        {isLoading ? (
+          <p>Shows Loading...</p>
+        ) : errorMessage ? (
+          <p>{errorMessage}</p>
+        ) : (
+          shows.map((show) => (
+            <div
+              key={show.id}
+              className="show-card"
+              onClick={() => handleShowClick(show.id)}
+              style={{ cursor: "pointer" }}
+            >
+              <img src={show.image} alt={show.title} className="show-image" />
+              <div className="show-content">
+                <h3 className="show-title">{show.title}</h3>
+                <p className="show-info">
+                  <span className="card-sub-heading">Genres:</span>{" "}
+                  {show.genres
+                    // Convert each genre ID to its corresponding title using GENRE_MAP
+                    .map((genreId) => GENRE_MAP[genreId]?.title)
+                    // Remove any undefined values (in case of unknown genre IDs)
+                    .filter(Boolean)
+                    // Join all genre titles with commas and spaces
+                    .join(", ")}
+                </p>
+                <p className="show-info">
+                  <span className="card-sub-heading">Seasons:</span>{" "}
+                  {show.seasons}
+                </p>
+              </div>
+              <p className="show-date">
+                <span className="card-sub-heading">Updated:</span>{" "}
+                {new Date(show.updated).toLocaleDateString()}
+              </p>
+            </div>
+          ))
+        )}
+      </div>
     </div>
   );
 }
