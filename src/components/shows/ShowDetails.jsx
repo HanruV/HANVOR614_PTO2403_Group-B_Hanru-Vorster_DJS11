@@ -2,10 +2,12 @@ import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 
 export default function ShowDetails({ showId, onBack }) {
+  // State to hold show details and loading status
   const [showDetails, setShowDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    // Function to fetch show details from the API
     const fetchShowDetails = async () => {
       setIsLoading(true);
       try {
@@ -20,7 +22,8 @@ export default function ShowDetails({ showId, onBack }) {
       } catch (error) {
         console.error(
           "Failed to fetch show details, please reload a show:",
-          error
+          error.message,
+          error.stack
         );
         setShowDetails(null);
       } finally {
@@ -33,6 +36,7 @@ export default function ShowDetails({ showId, onBack }) {
 
   return (
     <div className="show-details">
+      {/* Button to go back to the shows list */}
       <button onClick={onBack} className="back-button">
         ← Back to Shows
       </button>
@@ -42,6 +46,7 @@ export default function ShowDetails({ showId, onBack }) {
         <h2>Failed to fetch show details, please reload a show.</h2>
       ) : (
         <>
+          {/* Displaying show title and image */}
           <h2 className="show-title">Show Details: {showDetails.title}</h2>
           <div
             className="show-image-background"
@@ -55,6 +60,7 @@ export default function ShowDetails({ showId, onBack }) {
   );
 }
 
+// PropTypes for type checking the component's props
 ShowDetails.propTypes = {
   showId: PropTypes.string.isRequired,
   onBack: PropTypes.func.isRequired,
