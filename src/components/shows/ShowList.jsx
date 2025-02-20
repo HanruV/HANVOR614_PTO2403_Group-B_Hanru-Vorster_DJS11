@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import SortButton from "../common/SortButton";
 import { GENRE_MAP } from "../../constants/genres";
-import ShowDetailModal from "./ShowDetailModal";
+import ShowDetails from "./ShowDetails";
 
 export default function ShowList() {
   // State to store the list of podcast shows
@@ -58,54 +58,61 @@ export default function ShowList() {
 
   return (
     <div>
-      <div className="shows-header">
-        <h2>All Shows</h2>
-        <SortButton currentOrder={sortOrder} onToggle={handleSortToggle} />
-      </div>
-      <div className="show-list-grid">
-        {isLoading ? ( // Check if loading
-          <p>Shows Loading...</p> // Display loading message
-        ) : errorMessage ? ( // Check if there is an error message
-          <p>{errorMessage}</p> // Display error message
-        ) : (
-          shows.map((show) => (
-            <div
-              key={show.id}
-              className="show-card"
-              onClick={() => setSelectedShowId(show.id)}
-              style={{ cursor: "pointer" }}
-            >
-              <img src={show.image} alt={show.title} className="show-image" />
-              <div className="show-content">
-                <h3 className="show-title">{show.title}</h3>
-                <p className="show-info">
-                  <span className="card-sub-heading">Genres:</span>{" "}
-                  {show.genres
-                    // Convert each genre ID to its corresponding title using GENRE_MAP
-                    .map((genreId) => GENRE_MAP[genreId]?.title)
-                    // Remove any undefined values (in case of unknown genre IDs)
-                    .filter(Boolean)
-                    // Join all genre titles with commas and spaces
-                    .join(", ")}
-                </p>
-                <p className="show-info">
-                  <span className="card-sub-heading">Seasons:</span>{" "}
-                  {show.seasons}
-                </p>
-              </div>
-              <p className="show-date">
-                <span className="card-sub-heading">Updated:</span>{" "}
-                {new Date(show.updated).toLocaleDateString()}
-              </p>
-            </div>
-          ))
-        )}
-      </div>
-      {selectedShowId && (
-        <ShowDetailModal
+      {selectedShowId ? (
+        <ShowDetails
           showId={selectedShowId}
-          onClose={() => setSelectedShowId(null)}
+          onBack={() => setSelectedShowId(null)}
         />
+      ) : (
+        <>
+          <div className="shows-header">
+            <h2>All Shows</h2>
+            <SortButton currentOrder={sortOrder} onToggle={handleSortToggle} />
+          </div>
+          <div className="show-list-grid">
+            {isLoading ? (
+              <p>Shows Loading...</p>
+            ) : errorMessage ? (
+              <p>{errorMessage}</p>
+            ) : (
+              shows.map((show) => (
+                <div
+                  key={show.id}
+                  className="show-card"
+                  onClick={() => setSelectedShowId(show.id)}
+                  style={{ cursor: "pointer" }}
+                >
+                  <img
+                    src={show.image}
+                    alt={show.title}
+                    className="show-image"
+                  />
+                  <div className="show-content">
+                    <h3 className="show-title">{show.title}</h3>
+                    <p className="show-info">
+                      <span className="card-sub-heading">Genres:</span>{" "}
+                      {show.genres
+                        // Convert each genre ID to its corresponding title using GENRE_MAP
+                        .map((genreId) => GENRE_MAP[genreId]?.title)
+                        // Remove any undefined values (in case of unknown genre IDs)
+                        .filter(Boolean)
+                        // Join all genre titles with commas and spaces
+                        .join(", ")}
+                    </p>
+                    <p className="show-info">
+                      <span className="card-sub-heading">Seasons:</span>{" "}
+                      {show.seasons}
+                    </p>
+                  </div>
+                  <p className="show-date">
+                    <span className="card-sub-heading">Updated:</span>{" "}
+                    {new Date(show.updated).toLocaleDateString()}
+                  </p>
+                </div>
+              ))
+            )}
+          </div>
+        </>
       )}
     </div>
   );
