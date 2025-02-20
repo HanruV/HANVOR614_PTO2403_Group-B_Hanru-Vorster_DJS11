@@ -425,6 +425,21 @@ button:focus-visible {
   background-color: #646cff;
 }
 
+.seasons-button {
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #1a1a1a;
+  color: white;
+  border: 1px solid #646cff;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.seasons-button:hover {
+  background-color: #646cff;
+}
+
 .show-image-background {
   width: 100%;
   height: 200px;
@@ -440,4 +455,25 @@ button:focus-visible {
   font-size: 1.2rem;
   font-weight: 500;
   margin-bottom: 0.5rem;
+}
+
+.show-details-nav {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .show-details-nav {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .back-button,
+  .seasons-button {
+    width: 100%;
+  }
 }

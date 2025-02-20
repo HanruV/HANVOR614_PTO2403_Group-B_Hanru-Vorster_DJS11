@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
+import ShowDetailsNav from "../navigation/ShowDetailsNav";
 
 export default function ShowDetails({ showId, onBack }) {
   // State to hold show details and loading status
@@ -36,10 +37,7 @@ export default function ShowDetails({ showId, onBack }) {
 
   return (
     <div className="show-details">
-      {/* Button to go back to the shows list */}
-      <button onClick={onBack} className="back-button">
-        ← Back to Shows
-      </button>
+      <ShowDetailsNav onBack={onBack} />
       {isLoading ? (
         <h2>Details Loading...</h2>
       ) : !showDetails ? (
