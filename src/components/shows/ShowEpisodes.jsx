@@ -26,11 +26,16 @@ export default function ShowEpisodes() {
 
       <h2>{season.title} - Episodes</h2>
 
-      <div className="episodes-list">
+      <div className="show-list-grid">
         {season.episodes.map((episode, index) => (
-          <div key={index} className="episode-item">
-            <h3>{episode.title}</h3>
-            <p>{episode.description}</p>
+          <div key={index} className="show-card" style={{ cursor: "pointer" }}>
+            <div className="show-content">
+              <h3 className="show-title">{episode.title}</h3>
+              <p className="show-info">
+                <span className="card-sub-heading">Description:</span>{" "}
+                {episode.description}
+              </p>
+            </div>
           </div>
         ))}
       </div>

@@ -425,7 +425,7 @@ button:focus-visible {
     100vh - 180px
   ); /* Account for header (60px), footer (30px), music player (60px), and padding (30px) */
   padding: 2rem;
-  background-color: #1a1a1a;
+  background-color: #1f1f1f;
   border-radius: 8px;
   overflow: hidden;
   display: flex;
@@ -471,7 +471,7 @@ button:focus-visible {
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-  background-color: #1a1a1a;
+  background-color: #1f1f1f;
 }
 
 .show-description-heading {
