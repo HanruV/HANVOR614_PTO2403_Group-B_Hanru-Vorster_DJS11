@@ -48,15 +48,19 @@ export default function ShowDetails() {
       ) : !showDetails ? (
         <h2>Failed to fetch show details, please try again.</h2>
       ) : (
-        <>
-          <h2 className="show-title">Show Details: {showDetails.title}</h2>
-          <div
-            className="show-image-background"
-            style={{ backgroundImage: `url(${showDetails.image})` }}
-          ></div>
-          <h3 className="show-description-heading">Description</h3>
-          <p>{showDetails.description}</p>
-        </>
+        <div className="show-details-content">
+          <h2 className="show-title">Show Details For: {showDetails.title}</h2>
+          <div className="show-details-layout">
+            <div
+              className="show-image-background"
+              style={{ backgroundImage: `url(${showDetails.image})` }}
+            ></div>
+            <div className="show-description-container">
+              <h3 className="show-description-heading">Description</h3>
+              <p>{showDetails.description}</p>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

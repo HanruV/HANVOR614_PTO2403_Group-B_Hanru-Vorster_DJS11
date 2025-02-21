@@ -284,11 +284,27 @@ button:focus-visible {
   flex-direction: column;
   justify-content: space-between;
   font-size: 0.9rem;
+  min-width: 0;
+  overflow: hidden;
 }
 
-.show-title {
+.show-content h3,
+.show-content p {
+  margin: 0.2rem 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.show-details-content .show-title {
   margin: 0;
-  font-size: 1rem;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.show-card .show-title {
+  margin: 0;
+  font-size: 0.9rem;
 }
 
 .show-info {
@@ -441,11 +457,11 @@ button:focus-visible {
 }
 
 .show-image-background {
-  width: 100%;
-  height: 200px;
+  flex: 1;
+  height: 400px;
   border-radius: 16px;
-  margin: 1rem 0;
-  background-size: cover;
+  margin: 0;
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
   background-color: #1a1a1a;
@@ -455,6 +471,7 @@ button:focus-visible {
   font-size: 1.2rem;
   font-weight: 500;
   margin-bottom: 0.5rem;
+  margin-top: 0;
 }
 
 .show-details-nav {
@@ -463,6 +480,48 @@ button:focus-visible {
   align-items: center;
   flex-wrap: wrap;
   margin-bottom: 1rem;
+}
+
+.show-details-layout {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.show-description-container {
+  flex: 1;
+  padding: 1rem;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+.show-description-container p {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 10px;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Scrollbar styling for the description */
+.show-description-container p::-webkit-scrollbar {
+  width: 8px;
+}
+
+.show-description-container p::-webkit-scrollbar-track {
+  background: #1a1a1a;
+  border-radius: 4px;
+}
+
+.show-description-container p::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.show-description-container p::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 /* Responsive adjustments */
@@ -475,5 +534,15 @@ button:focus-visible {
   .back-button,
   .seasons-button {
     width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .show-details-layout {
+    flex-direction: column;
+  }
+
+  .show-image-background {
+    height: 300px;
   }
 }
