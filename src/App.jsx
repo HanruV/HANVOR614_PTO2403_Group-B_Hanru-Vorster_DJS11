@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ShowsSection from "./components/shows/ShowsSection";
 import ShowDetails from "./components/shows/ShowDetails";
+import ShowSeasons from "./components/shows/ShowSeasons";
 import MusicPlayer from "./components/musicPlayer/MusicPlayer";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<ShowsSection />} />
           {/* :id is a variable that can be accessed in ShowDetails component */}
           <Route path="/show/:id" element={<ShowDetails />} />
+          <Route path="/show/:id/seasons" element={<ShowSeasons />} />
         </Routes>
         <section className="player-container">
           <MusicPlayer />
