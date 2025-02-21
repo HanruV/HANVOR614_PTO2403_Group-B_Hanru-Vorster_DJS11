@@ -48,23 +48,25 @@ export default function ShowSeasons() {
       ) : error ? (
         <h2>{error}</h2>
       ) : (
-        <div className="show-list-grid">
-          {seasons.map((season) => (
-            <div key={season.id} className="show-card">
-              <img
-                src={season.image}
-                alt={season.title}
-                className="show-image"
-              />
-              <div className="show-content">
-                <h3 className="show-title">{season.title}</h3>
-                <p className="show-info">
-                  <span className="card-sub-heading">Episodes:</span>{" "}
-                  {season.episodes.length}
-                </p>
+        <div className="seasons-container">
+          <div className="show-list-grid">
+            {seasons.map((season) => (
+              <div key={season.id} className="show-card">
+                <img
+                  src={season.image}
+                  alt={season.title}
+                  className="show-image"
+                />
+                <div className="show-content">
+                  <h3 className="show-title">{season.title}</h3>
+                  <p className="show-info">
+                    <span className="card-sub-heading">Episodes:</span>{" "}
+                    {season.episodes.length}
+                  </p>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       )}
     </div>

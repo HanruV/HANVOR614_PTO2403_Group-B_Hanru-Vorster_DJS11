@@ -421,9 +421,16 @@ button:focus-visible {
 }
 
 .show-details {
+  height: calc(
+    100vh - 180px
+  ); /* Account for header (60px), footer (30px), music player (60px), and padding (30px) */
   padding: 2rem;
   background-color: #1a1a1a;
   border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 90px; /* Account for music player height + bottom spacing */
 }
 
 .back-button {
@@ -545,4 +552,30 @@ button:focus-visible {
   .show-image-background {
     height: 300px;
   }
+}
+
+/* Seasons container styles */
+.seasons-container {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+/* Scrollbar styling for seasons */
+.seasons-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.seasons-container::-webkit-scrollbar-track {
+  background: #1a1a1a;
+  border-radius: 4px;
+}
+
+.seasons-container::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.seasons-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
