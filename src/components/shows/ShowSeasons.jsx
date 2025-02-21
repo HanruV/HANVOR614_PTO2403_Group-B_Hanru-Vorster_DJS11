@@ -50,8 +50,8 @@ export default function ShowSeasons() {
       ) : (
         <div className="seasons-container">
           <div className="show-list-grid">
-            {seasons.map((season) => (
-              <div key={season.id} className="show-card">
+            {seasons.map((season, index) => (
+              <div key={season.season || index} className="show-card">
                 <img
                   src={season.image}
                   alt={season.title}
