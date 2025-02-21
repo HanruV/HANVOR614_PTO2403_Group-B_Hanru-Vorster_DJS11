@@ -34,6 +34,12 @@ export default function ShowSeasons() {
     navigate(`/show/${id}`);
   };
 
+  // Function to handle the click event on a season card
+  const handleSeasonClick = async (season) => {
+    // Navigate to the season details page with the season data as state
+    navigate(`/show/${id}/season/${season.season}`, { state: { season } });
+  };
+
   return (
     <div className="show-details">
       <nav className="show-details-nav">
@@ -51,7 +57,12 @@ export default function ShowSeasons() {
         <div className="seasons-container">
           <div className="show-list-grid">
             {seasons.map((season, index) => (
-              <div key={season.season || index} className="show-card">
+              <div
+                key={season.season || index}
+                className="show-card"
+                onClick={() => handleSeasonClick(season)}
+                style={{ cursor: "pointer" }}
+              >
                 <img
                   src={season.image}
                   alt={season.title}
