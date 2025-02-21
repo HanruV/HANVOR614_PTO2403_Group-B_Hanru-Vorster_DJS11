@@ -51,7 +51,7 @@ export default function ShowEpisodes() {
       ) : error ? (
         <h2>{error}</h2>
       ) : (
-        <>
+        <div className="seasons-container">
           <h2>{season.title} - Episodes</h2>
           <div className="show-list-grid">
             {season.episodes.map((episode, index) => (
@@ -70,7 +70,7 @@ export default function ShowEpisodes() {
               </div>
             ))}
           </div>
-        </>
+        </div>
       )}
     </div>
   );
