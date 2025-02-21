@@ -25,7 +25,10 @@ export default function ShowDetails() {
         const data = await response.json();
         setShowDetails(data);
       } catch (error) {
-        console.error("Failed to fetch show details:", error.message);
+        console.error(
+          "Failed to load show details. Please refresh the page.",
+          error.message
+        );
         setShowDetails(null);
       } finally {
         setIsLoading(false);
@@ -46,10 +49,10 @@ export default function ShowDetails() {
       {isLoading ? (
         <h2>Details Loading...</h2>
       ) : !showDetails ? (
-        <h2>Failed to fetch show details, please try again.</h2>
+        <h2>Failed to load show details. Please refresh the page.</h2>
       ) : (
         <div className="show-details-content">
-          <h2 className="show-title">Show Details For: {showDetails.title}</h2>
+          <h2 className="show-title">{showDetails.title}</h2>
           <div className="show-details-layout">
             <div
               className="show-image-background"
