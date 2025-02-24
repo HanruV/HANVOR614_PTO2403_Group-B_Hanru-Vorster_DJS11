@@ -1,5 +1,6 @@
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import ShowEpisodesNav from "../navigation/ShowEpisodesNav";
 
 export default function ShowEpisodes() {
   const location = useLocation();
@@ -43,14 +44,11 @@ export default function ShowEpisodes() {
 
   // Function to handle season change
   const handleSeasonChange = (event) => {
-    // Find the new season from the allSeasons array
     const newSeason = allSeasons.find(
       (s) => s.season === Number(event.target.value)
     );
-    // If the new season is found, update the selectedSeason state and the URL
     if (newSeason) {
       setSelectedSeason(newSeason);
-      // Update the URL to reflect the new season
       navigate(`/show/${id}/season/${newSeason.season}`, {
         state: { season: newSeason },
         replace: true,
@@ -58,31 +56,16 @@ export default function ShowEpisodes() {
     }
   };
 
-  // Function to handle the click event on the back button
-  const handleBack = () => {
-    navigate(`/show/${id}/seasons`);
-  };
-
   return (
     <div className="show-episodes">
-      <nav className="show-episodes-nav">
-        <button onClick={handleBack} className="back-button">
-          ← Back to Seasons
-        </button>
-        {!isLoading && !error && allSeasons.length > 0 && (
-          <select
-            value={selectedSeason?.season || ""}
-            onChange={handleSeasonChange}
-            className="season-select"
-          >
-            {allSeasons.map((s) => (
-              <option key={s.season} value={s.season}>
-                {s.title}
-              </option>
-            ))}
-          </select>
-        )}
-      </nav>
+      <ShowEpisodesNav
+        showId={id}
+        selectedSeason={selectedSeason}
+        allSeasons={allSeasons}
+        onSeasonChange={handleSeasonChange}
+        isLoading={isLoading}
+        error={error}
+      />
 
       {isLoading ? (
         <h2>Loading episodes...</h2>

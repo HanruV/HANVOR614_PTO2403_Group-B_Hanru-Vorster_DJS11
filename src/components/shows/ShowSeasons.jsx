@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import ShowSeasonsNav from "../navigation/ShowSeasonsNav";
 
 export default function ShowSeasons() {
   const navigate = useNavigate();
@@ -30,21 +31,13 @@ export default function ShowSeasons() {
     fetchSeasons();
   }, [id]);
 
-  const handleBack = () => {
-    navigate(`/show/${id}`);
-  };
-
   const handleSeasonClick = async (season) => {
     navigate(`/show/${id}/season/${season.season}`, { state: { season } });
   };
 
   return (
     <div className="show-details">
-      <nav className="show-details-nav">
-        <button onClick={handleBack} className="back-button">
-          ← Back to Show Details
-        </button>
-      </nav>
+      <ShowSeasonsNav />
 
       {isLoading ? (
         <h2>Loading seasons...</h2>
