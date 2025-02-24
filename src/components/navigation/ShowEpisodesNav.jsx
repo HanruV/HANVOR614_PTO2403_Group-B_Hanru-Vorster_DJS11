@@ -19,23 +19,25 @@ export default function ShowEpisodesNav({
 
   return (
     <nav className="show-episodes-nav">
-      <button onClick={handleBack} className="back-button">
-        ← Back to Seasons
-      </button>
-      {/* Render season selection if not loading and no error */}
-      {!isLoading && !error && allSeasons.length > 0 && (
-        <select
-          value={selectedSeason?.season || ""}
-          onChange={onSeasonChange}
-          className="season-select"
-        >
-          {allSeasons.map((s) => (
-            <option key={s.season} value={s.season}>
-              {s.title}
-            </option>
-          ))}
-        </select>
-      )}
+      <div className="nav-controls">
+        <button onClick={handleBack} className="back-button">
+          ← Back to Seasons
+        </button>
+        {/* Render season selection if not loading and no error */}
+        {!isLoading && !error && allSeasons.length > 0 && (
+          <select
+            value={selectedSeason?.season || ""}
+            onChange={onSeasonChange}
+            className="season-select"
+          >
+            {allSeasons.map((s) => (
+              <option key={s.season} value={s.season}>
+                {s.title}
+              </option>
+            ))}
+          </select>
+        )}
+      </div>
     </nav>
   );
 }
