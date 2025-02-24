@@ -7,7 +7,6 @@ import ShowDetails from "./components/shows/ShowDetails";
 import ShowSeasons from "./components/shows/ShowSeasons";
 import MusicPlayer from "./components/musicPlayer/MusicPlayer";
 import ShowEpisodes from "./components/shows/ShowEpisodes";
-import Favorites from "./components/shows/Favorites";
 
 function App() {
   return (
@@ -17,7 +16,7 @@ function App() {
       <main className="main-content">
         <Routes>
           <Route path="/" element={<ShowsSection />} />
-          <Route path="/favorites" element={<Favorites />} />
+          <Route path="/favorites" element={<ShowsSection />} />
           <Route path="/show/:id" element={<ShowDetails />} />
           <Route path="/show/:id/seasons" element={<ShowSeasons />} />
           <Route
