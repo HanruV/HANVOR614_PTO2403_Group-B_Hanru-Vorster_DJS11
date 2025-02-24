@@ -34,9 +34,7 @@ export default function ShowSeasons() {
     navigate(`/show/${id}`);
   };
 
-  // Function to handle the click event on a season card
   const handleSeasonClick = async (season) => {
-    // Navigate to the season details page with the season data as state
     navigate(`/show/${id}/season/${season.season}`, { state: { season } });
   };
 
@@ -47,7 +45,6 @@ export default function ShowSeasons() {
           ← Back to Show Details
         </button>
       </nav>
-      <h2>Show Seasons</h2>
 
       {isLoading ? (
         <h2>Loading seasons...</h2>
@@ -55,6 +52,7 @@ export default function ShowSeasons() {
         <h2>{error}</h2>
       ) : (
         <div className="seasons-container">
+          <h2>Show Seasons</h2>
           <div className="show-list-grid">
             {seasons.map((season, index) => (
               <div
