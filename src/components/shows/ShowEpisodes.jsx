@@ -76,17 +76,19 @@ export default function ShowEpisodes() {
           <h2>{selectedSeason?.title} - Episodes</h2>
           <div className="show-list-grid">
             {selectedSeason?.episodes.map((episode, index) => (
-              <div
-                key={index}
-                className="show-card"
-                style={{ cursor: "pointer" }}
-              >
+              <div key={index} className="show-card episode-card">
                 <div className="show-content">
                   <h3 className="show-title">{episode.title}</h3>
                   <p className="show-info">
                     <span className="card-sub-heading">Description:</span>{" "}
                     {episode.description}
                   </p>
+                  <button
+                    className="add-remove-toggle-button"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    Add to Favorites
+                  </button>
                 </div>
               </div>
             ))}

@@ -642,3 +642,23 @@ button:focus-visible {
 .home-nav-button:hover {
   background-color: #646cff;
 }
+
+.add-remove-toggle-button {
+  font-size: 0.8rem;
+  padding: 0.3em 0.8em;
+  margin-left: auto; /* This will push the button to the right */
+  align-self: flex-end; /* Align to the end (right) of the flex container */
+  white-space: nowrap;
+  min-width: fit-content;
+  background-color: #2a2a2a;
+  border: 1px solid #646cff;
+}
+
+.add-remove-toggle-button:hover {
+  background-color: #646cff;
+  color: white;
+}
+
+.episode-card {
+  cursor: default;
+}
