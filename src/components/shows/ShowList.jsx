@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import SortButton from "../common/SortButton";
+import SortGenreButton from "../common/SortGenreButton";
 import { GENRE_MAP } from "../../constants/genres";
 import { sortByTitle } from "../../sortFunctions/SortAZ";
 
@@ -62,7 +63,10 @@ export default function ShowList() {
     <div>
       <div className="shows-header">
         <h2>All Shows</h2>
-        <SortButton currentOrder={sortOrder} onToggle={handleSortToggle} />
+        <div className="filter-controls">
+          <SortButton currentOrder={sortOrder} onToggle={handleSortToggle} />
+          <SortGenreButton selectedGenre="" />
+        </div>
       </div>
       <div className="show-list-grid">
         {isLoading ? (
