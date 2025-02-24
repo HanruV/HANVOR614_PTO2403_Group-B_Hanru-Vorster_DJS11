@@ -627,3 +627,18 @@ button:focus-visible {
   flex-wrap: wrap;
   margin-bottom: 1rem;
 }
+
+.home-nav-button {
+  margin-left: 2rem;
+  padding: 0.5rem 1rem;
+  background-color: #1a1a1a;
+  color: white;
+  border: 1px solid #646cff;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.home-nav-button:hover {
+  background-color: #646cff;
+}

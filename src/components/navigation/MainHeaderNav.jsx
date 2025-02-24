@@ -9,7 +9,7 @@ export default function MainHeaderNav() {
 
   return (
     <nav className="main-header-nav">
-      <button onClick={handleHomeClick} className="nav-button">
+      <button onClick={handleHomeClick} className="home-nav-button">
         Home
       </button>
     </nav>
