@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import SortButton from "../common/SortButton";
 import { GENRE_MAP } from "../../constants/genres";
+import { sortByTitle } from "../../sortFunctions/SortAZ";
 
 export default function ShowList() {
   const navigate = useNavigate();
@@ -37,12 +38,7 @@ export default function ShowList() {
 
   // Sort the shows list based on the sort order
   const sortShows = (data, order) => {
-    const sortedShows = [...data].sort((a, b) => {
-      if (order === "asc") {
-        return a.title.localeCompare(b.title);
-      }
-      return b.title.localeCompare(a.title);
-    });
+    const sortedShows = sortByTitle(data, order);
     setShows(sortedShows);
   };
 
