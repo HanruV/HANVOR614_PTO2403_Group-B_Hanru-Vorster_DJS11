@@ -13,6 +13,12 @@ export default function ShowEpisodes() {
   const [allSeasons, setAllSeasons] = useState([]);
   // state to store the selected season
   const [selectedSeason, setSelectedSeason] = useState(season);
+  // Initialize favorites state from localStorage or empty array if none exists
+  const [favorites, setFavorites] = useState(() => {
+    const storedFavorites = localStorage.getItem("podcastFavorites");
+    // Initialize favorites state from localStorage or empty array if none exists
+    return storedFavorites ? JSON.parse(storedFavorites) : [];
+  });
 
   // fetch all seasons
   useEffect(() => {
@@ -56,6 +62,41 @@ export default function ShowEpisodes() {
     }
   };
 
+  // Function to handle adding/removing episodes from favorites
+  const handleToggleFavorite = (episode) => {
+    // Create a unique identifier for the favorite episode
+    const favoriteEpisode = {
+      id: `${id}-${selectedSeason.season}-${episode.title}`, // Unique ID combining show, season, and episode
+      showId: id,
+      seasonNumber: selectedSeason.season,
+      seasonTitle: selectedSeason.title,
+      episode: episode,
+      dateAdded: new Date().toISOString(), // Track when the episode was added to favorites
+    };
+
+    setFavorites((prevFavorites) => {
+      // Check if episode is already in favorites
+      const existingIndex = prevFavorites.findIndex(
+        (fav) => fav.id === favoriteEpisode.id
+      );
+      let newFavorites;
+
+      if (existingIndex >= 0) {
+        // Remove from favorites if already exists
+        newFavorites = prevFavorites.filter(
+          (fav) => fav.id !== favoriteEpisode.id
+        );
+      } else {
+        // Add to favorites if doesn't exist
+        newFavorites = [...prevFavorites, favoriteEpisode];
+      }
+
+      // Update localStorage with the new favorites list
+      localStorage.setItem("podcastFavorites", JSON.stringify(newFavorites));
+      return newFavorites;
+    });
+  };
+
   return (
     <div className="show-episodes">
       <ShowEpisodesNav
@@ -83,11 +124,22 @@ export default function ShowEpisodes() {
                     <span className="card-sub-heading">Description:</span>{" "}
                     {episode.description}
                   </p>
+                  {/* Toggle button that changes text based on favorite status */}
                   <button
                     className="add-remove-toggle-button"
-                    onClick={(e) => e.stopPropagation()}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleToggleFavorite(episode);
+                    }}
                   >
-                    Add to Favorites
+                    {/* Check if episode is in favorites by looking up its unique ID */}
+                    {favorites.some(
+                      (fav) =>
+                        fav.id ===
+                        `${id}-${selectedSeason.season}-${episode.title}`
+                    )
+                      ? "Remove from Favorites"
+                      : "Add to Favorites"}
                   </button>
                 </div>
               </div>
