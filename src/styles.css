@@ -631,16 +631,15 @@ button:focus-visible {
 .home-nav-button {
   margin-left: 2rem;
   padding: 0.5rem 1rem;
-  background-color: #1a1a1a;
-  color: white;
-  border: 1px solid #646cff;
-  border-radius: 4px;
+  color: #646cff;
+  text-decoration: none;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: color 0.2s;
 }
 
 .home-nav-button:hover {
-  background-color: #646cff;
+  color: #535bf2;
+  background-color: transparent;
 }
 
 .add-remove-toggle-button {
