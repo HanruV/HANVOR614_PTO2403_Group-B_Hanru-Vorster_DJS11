@@ -144,7 +144,8 @@ export default function ShowEpisodes() {
                     </div>
                     <p className="episode-description">
                       <span className="episode-label">Description:</span>{" "}
-                      {episode.description}
+                      {episode.description ||
+                        "No Episode Description Available"}
                     </p>
                   </div>
                 </div>
