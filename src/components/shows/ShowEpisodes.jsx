@@ -122,17 +122,21 @@ export default function ShowEpisodes() {
           <div className="show-list-grid">
             {selectedSeason?.episodes.map((episode, index) => (
               <div key={index} className="show-card episode-card">
-                <div className="show-content">
-                  <h3 className="show-title">{episode.title}</h3>
-                  {/* Toggle button that changes text based on favorite status */}
+                <div className="episode-content">
+                  <div className="episode-info-container">
+                    <h3 className="episode-title">{episode.title}</h3>
+                    <p className="episode-description">
+                      <span className="episode-label">Description:</span>{" "}
+                      {episode.description}
+                    </p>
+                  </div>
                   <button
-                    className="add-remove-toggle-button"
+                    className="episode-favorite-button"
                     onClick={(e) => {
                       e.stopPropagation();
                       handleToggleFavorite(episode);
                     }}
                   >
-                    {/* Check if episode is in favorites by looking up its unique ID */}
                     {favorites.some(
                       (fav) =>
                         fav.id ===
