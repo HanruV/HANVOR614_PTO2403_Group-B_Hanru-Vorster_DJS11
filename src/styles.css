@@ -661,3 +661,45 @@ button:focus-visible {
 .episode-card {
   cursor: default;
 }
+
+/* Favorite Episode Card Specific Styles */
+.show-card.episode-card {
+  height: 120px; /* Slightly taller to accommodate content */
+  background-color: #2a2a2a;
+  border: 1px solid #3a3a3a;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.show-card.episode-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.show-card.episode-card .show-content {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.show-card.episode-card .show-info-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.show-card.episode-card .add-remove-toggle-button {
+  align-self: center;
+  height: fit-content;
+  background-color: #1a1a1a;
+  color: #646cff;
+  border: 1px solid #646cff;
+  padding: 0.5rem 1rem;
+  transition: all 0.2s ease;
+}
+
+.show-card.episode-card .add-remove-toggle-button:hover {
+  background-color: #646cff;
+  color: white;
+}

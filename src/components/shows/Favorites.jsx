@@ -31,19 +31,21 @@ export default function Favorites() {
           favorites.map((favorite) => (
             <div key={favorite.id} className="show-card episode-card">
               <div className="show-content">
-                <h3 className="show-title">{favorite.episode.title}</h3>
-                <p className="show-info">
-                  <span className="card-sub-heading">Show Title:</span>{" "}
-                  {favorite.showTitle}
-                </p>
-                <p className="show-info">
-                  <span className="card-sub-heading">Season:</span>{" "}
-                  {favorite.seasonTitle}
-                </p>
-                <p className="show-info">
-                  <span className="card-sub-heading">Added:</span>{" "}
-                  {new Date(favorite.dateAdded).toLocaleDateString()}
-                </p>
+                <div className="show-info-container">
+                  <h3 className="show-title">{favorite.episode.title}</h3>
+                  <p className="show-info">
+                    <span className="card-sub-heading">Show Title:</span>{" "}
+                    {favorite.showTitle}
+                  </p>
+                  <p className="show-info">
+                    <span className="card-sub-heading">Season:</span>{" "}
+                    {favorite.seasonTitle}
+                  </p>
+                  <p className="show-info">
+                    <span className="card-sub-heading">Added:</span>{" "}
+                    {new Date(favorite.dateAdded).toLocaleDateString()}
+                  </p>
+                </div>
                 <button
                   className="add-remove-toggle-button"
                   onClick={() => handleRemoveFavorite(favorite.id)}
