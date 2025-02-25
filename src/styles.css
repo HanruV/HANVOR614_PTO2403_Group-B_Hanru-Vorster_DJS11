@@ -65,7 +65,8 @@ a:hover {
 .shows-container > *,
 .modal-content p,
 .show-description-container p,
-.seasons-container {
+.seasons-container,
+.favorites-container {
   &::-webkit-scrollbar {
     width: 8px;
   }
