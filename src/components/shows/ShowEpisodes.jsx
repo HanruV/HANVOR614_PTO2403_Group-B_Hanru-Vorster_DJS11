@@ -11,6 +11,8 @@ export default function ShowEpisodes() {
   const [error, setError] = useState(null);
   // state to store all seasons
   const [allSeasons, setAllSeasons] = useState([]);
+  // state to store the show title
+  const [showTitle, setShowTitle] = useState("");
   // state to store the selected season
   const [selectedSeason, setSelectedSeason] = useState(season);
   // Initialize favorites state from localStorage or empty array if none exists
@@ -33,6 +35,7 @@ export default function ShowEpisodes() {
         }
         const data = await response.json();
         setAllSeasons(data.seasons);
+        setShowTitle(data.title); // Store the show title
         setIsLoading(false);
       } catch (error) {
         console.error(
@@ -68,10 +71,11 @@ export default function ShowEpisodes() {
     const favoriteEpisode = {
       id: `${id}-${selectedSeason.season}-${episode.title}`, // Unique ID combining show, season, and episode
       showId: id,
+      showTitle: showTitle, // Add show title to the stored data
       seasonNumber: selectedSeason.season,
       seasonTitle: selectedSeason.title,
       episode: episode,
-      dateAdded: new Date().toISOString(), // Track when the episode was added to favorites
+      dateAdded: new Date().toISOString(),
     };
 
     setFavorites((prevFavorites) => {
