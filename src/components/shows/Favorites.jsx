@@ -1,4 +1,6 @@
 import { useState } from "react";
+import SortButton from "../common/SortButton";
+import { sortByTitle } from "../../sortFunctions/SortAZ";
 
 export default function Favorites() {
   // Initialize favorites state from localStorage
@@ -7,6 +9,8 @@ export default function Favorites() {
     const storedFavorites = localStorage.getItem("podcastFavorites");
     return storedFavorites ? JSON.parse(storedFavorites) : [];
   });
+  // Sort order state
+  const [sortOrder, setSortOrder] = useState("asc");
 
   // Removes a favorite episode by its ID
   // Updates both state and localStorage to maintain persistence
@@ -18,10 +22,32 @@ export default function Favorites() {
     });
   };
 
+  // Add sort toggle handler
+  const handleSortToggle = () => {
+    const newOrder = sortOrder === "asc" ? "desc" : "asc";
+    setSortOrder(newOrder);
+
+    // Sort favorites based on episode title
+    const sortedFavorites = sortByTitle(
+      favorites.map((fav) => ({
+        ...fav,
+        title: fav.episode.title, // Map to match the structure expected by sortByTitle
+      })),
+      newOrder
+    ).map((sorted) =>
+      favorites.find((fav) => fav.episode.title === sorted.title)
+    );
+
+    setFavorites(sortedFavorites);
+  };
+
   return (
     <div className="favorites-container">
       <div className="favorites-header">
         <h2>Favorite Episodes</h2>
+        <div className="filter-controls">
+          <SortButton currentOrder={sortOrder} onToggle={handleSortToggle} />
+        </div>
       </div>
       <div className="favorites-grid">
         {favorites.length === 0 ? (
