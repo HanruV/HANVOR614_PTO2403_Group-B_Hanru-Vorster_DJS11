@@ -124,10 +124,6 @@ export default function ShowEpisodes() {
               <div key={index} className="show-card episode-card">
                 <div className="show-content">
                   <h3 className="show-title">{episode.title}</h3>
-                  <p className="show-info">
-                    <span className="card-sub-heading">Description:</span>{" "}
-                    {episode.description}
-                  </p>
                   {/* Toggle button that changes text based on favorite status */}
                   <button
                     className="add-remove-toggle-button"
