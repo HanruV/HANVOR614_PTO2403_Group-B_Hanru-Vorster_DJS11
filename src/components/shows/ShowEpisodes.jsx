@@ -124,27 +124,29 @@ export default function ShowEpisodes() {
               <div key={index} className="show-card episode-card">
                 <div className="episode-content">
                   <div className="episode-info-container">
-                    <h3 className="episode-title">{episode.title}</h3>
+                    <div className="episode-title-row">
+                      <h3 className="episode-title">{episode.title}</h3>
+                      <button
+                        className="episode-favorite-button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleToggleFavorite(episode);
+                        }}
+                      >
+                        {favorites.some(
+                          (fav) =>
+                            fav.id ===
+                            `${id}-${selectedSeason.season}-${episode.title}`
+                        )
+                          ? "Remove from Favorites"
+                          : "Add to Favorites"}
+                      </button>
+                    </div>
                     <p className="episode-description">
                       <span className="episode-label">Description:</span>{" "}
                       {episode.description}
                     </p>
                   </div>
-                  <button
-                    className="episode-favorite-button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleToggleFavorite(episode);
-                    }}
-                  >
-                    {favorites.some(
-                      (fav) =>
-                        fav.id ===
-                        `${id}-${selectedSeason.season}-${episode.title}`
-                    )
-                      ? "Remove from Favorites"
-                      : "Add to Favorites"}
-                  </button>
                 </div>
               </div>
             ))}

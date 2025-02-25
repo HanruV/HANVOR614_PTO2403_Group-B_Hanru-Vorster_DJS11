@@ -714,10 +714,6 @@ button:focus-visible {
   line-height: 1.4;
 }
 
-.episode-card .show-content {
-  gap: 0.5rem;
-}
-
 .episode-content {
   flex: 1;
   display: flex;
@@ -732,10 +728,18 @@ button:focus-visible {
   gap: 0.5rem;
 }
 
+.episode-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
 .episode-title {
   font-size: 1.1rem;
   margin: 0;
   color: white;
+  flex: 1;
 }
 
 .episode-description {
