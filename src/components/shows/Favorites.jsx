@@ -19,35 +19,34 @@ export default function Favorites() {
   };
 
   return (
-    <div>
-      <div className="shows-header">
+    <div className="favorites-container">
+      <div className="favorites-header">
         <h2>Favorite Episodes</h2>
       </div>
-      <div className="show-list-grid">
+      <div className="favorites-grid">
         {favorites.length === 0 ? (
           <p>No favorite episodes yet</p>
         ) : (
-          // Map through favorites array to create episode cards
           favorites.map((favorite) => (
-            <div key={favorite.id} className="show-card episode-card">
-              <div className="show-content">
-                <div className="show-info-container">
-                  <h3 className="show-title">{favorite.episode.title}</h3>
-                  <p className="show-info">
-                    <span className="card-sub-heading">Show Title:</span>{" "}
+            <div key={favorite.id} className="favorite-card">
+              <div className="favorite-content">
+                <div className="favorite-info-container">
+                  <h3 className="favorite-title">{favorite.episode.title}</h3>
+                  <p className="favorite-info">
+                    <span className="favorite-label">Show Title:</span>{" "}
                     {favorite.showTitle}
                   </p>
-                  <p className="show-info">
-                    <span className="card-sub-heading">Season:</span>{" "}
+                  <p className="favorite-info">
+                    <span className="favorite-label">Season:</span>{" "}
                     {favorite.seasonTitle}
                   </p>
-                  <p className="show-info">
-                    <span className="card-sub-heading">Added:</span>{" "}
+                  <p className="favorite-added-date">
+                    <span className="favorite-label">Date Added: </span>
                     {new Date(favorite.dateAdded).toLocaleDateString()}
                   </p>
                 </div>
                 <button
-                  className="add-remove-toggle-button"
+                  className="favorite-remove-button"
                   onClick={() => handleRemoveFavorite(favorite.id)}
                 >
                   Remove from Favorites

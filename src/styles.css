@@ -753,7 +753,7 @@ button:focus-visible {
 }
 
 .episode-label {
-  color: #888;
+  color: white;
   font-weight: 500;
 }
 
@@ -771,4 +771,110 @@ button:focus-visible {
 .episode-favorite-button:hover {
   background-color: #646cff;
   color: white;
+}
+
+/* Favorites Component Styles */
+.favorites-container {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.favorites-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.favorites-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.favorite-card {
+  height: 120px;
+  background-color: #2a2a2a;
+  border: 1px solid #3a3a3a;
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.favorite-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.favorite-content {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
+  align-items: stretch;
+  padding: 0.5rem;
+  width: 100%;
+}
+
+.favorite-info-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  position: relative;
+}
+
+.favorite-info {
+  margin: 0.2rem 0;
+  font-size: 0.9rem;
+  color: #ddd;
+}
+
+.favorite-added-date {
+  margin: 0.2rem 0;
+  font-size: 0.8rem;
+  color: #ddd;
+}
+
+.favorite-remove-button {
+  align-self: center;
+  height: fit-content;
+  background-color: #2a2a2a;
+  border: 1px solid #646cff;
+  padding: 0.5rem 1rem;
+  white-space: nowrap;
+  color: white;
+  transition: all 0.2s ease;
+}
+
+.favorite-remove-button:hover {
+  background-color: #646cff;
+  color: white;
+}
+
+.favorite-title {
+  font-size: 1.1rem;
+  margin: 0;
+  color: white;
+  flex: 1;
+}
+
+.favorite-info {
+  margin: 0.2rem 0;
+  font-size: 0.9rem;
+  color: #ddd;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  line-height: 1.4;
+}
+
+.favorite-label {
+  color: white;
+  font-weight: 500;
 }
