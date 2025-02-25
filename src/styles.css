@@ -1,4 +1,6 @@
-/* Root and general styles */
+/* ==========================================================================
+   Base Styles and CSS Variables
+   ========================================================================== */
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -10,8 +12,17 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  --primary-color: #646cff;
+  --bg-dark: #1a1a1a;
+  --bg-darker: #1f1f1f;
+  --text-light: #ddd;
+  --card-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --transition-default: 0.2s ease;
 }
 
+/* ==========================================================================
+   Typography and Links
+   ========================================================================== */
 /* Links */
 a {
   font-weight: 500;
@@ -22,102 +33,10 @@ a:hover {
   color: #535bf2;
 }
 
-/* Body */
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-/* Typography */
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-/* Buttons */
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-/* Root container */
-#root {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-/* Logo styles */
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-/* Logo animation */
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-/* Component styles */
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
-/* Light theme */
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
-
-/* Layout - Main Content Structure */
+/* ==========================================================================
+   Layout Components
+   ========================================================================== */
+/* Main structural elements */
 .main-content {
   display: flex;
   flex-direction: column;
@@ -127,10 +46,9 @@ button:focus-visible {
   overflow: hidden;
 }
 
-/* Layout - Shows Grid */
 .shows-container {
   display: flex;
-  gap: 20px;
+  gap: 2rem;
   width: 100%;
   height: calc(100% - 60px);
   overflow: hidden;
@@ -144,21 +62,27 @@ button:focus-visible {
   padding-right: 10px;
 }
 
-.shows-container > *::-webkit-scrollbar {
-  width: 8px;
-}
+.shows-container > *,
+.modal-content p,
+.show-description-container p,
+.seasons-container {
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
 
-.shows-container > *::-webkit-scrollbar-track {
-  background: #1a1a1a;
-}
+  &::-webkit-scrollbar-track {
+    background: #1a1a1a;
+    border-radius: 4px;
+  }
 
-.shows-container > *::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 4px;
-}
+  &::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
 
-.shows-container > *::-webkit-scrollbar-thumb:hover {
-  background: #555;
+    &:hover {
+      background: #555;
+    }
+  }
 }
 
 /* Media Player */
@@ -245,32 +169,31 @@ button:focus-visible {
   box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Show List Styles */
-.show-list-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.show-card {
-  border: none;
+/* ==========================================================================
+   Card Components
+   ========================================================================== */
+/* Common card styles for shows, episodes, and favorites */
+.show-card,
+.episode-card,
+.favorite-card {
+  background-color: #2a2a2a;
+  border: 1px solid #3a3a3a;
   border-radius: 8px;
   overflow: hidden;
   padding: 0.5rem;
   display: flex;
   gap: 0.5rem;
-  height: 100px;
   align-items: center;
   position: relative;
-  background-color: #3a3a3a;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
+  margin-bottom: 1rem;
 
-.show-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
 }
 
 .card-sub-heading {
@@ -335,21 +258,9 @@ button:focus-visible {
   margin-bottom: 1rem;
 }
 
-.sort-button {
-  padding: 0.5rem 1rem;
-  background-color: #1a1a1a;
-  color: white;
-  border: 1px solid #646cff;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.sort-button:hover {
-  background-color: #646cff;
-}
-
-/* Modal-Show-Detail */
+/* ==========================================================================
+   Modal and Dialog Components
+   ========================================================================== */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -369,7 +280,7 @@ button:focus-visible {
   border-radius: 8px;
   width: 90%;
   max-width: 600px;
-  height: 400px; /* Set fixed height */
+  height: 400px;
 }
 
 .modal-content img {
@@ -401,24 +312,6 @@ button:focus-visible {
   line-height: 1.6;
 }
 
-.modal-content p::-webkit-scrollbar {
-  width: 8px;
-}
-
-.modal-content p::-webkit-scrollbar-track {
-  background: #1a1a1a;
-  border-radius: 4px;
-}
-
-.modal-content p::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 4px;
-}
-
-.modal-content p::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
-
 .modal-description-heading {
   font-size: 0.9rem;
   font-weight: 500;
@@ -427,16 +320,14 @@ button:focus-visible {
 }
 
 .show-details {
-  height: calc(
-    100vh - 180px
-  ); /* Account for header (60px), footer (30px), music player (60px), and padding (30px) */
+  height: calc(100vh - 180px);
   padding: 2rem;
   background-color: #1f1f1f;
   border-radius: 8px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  margin-bottom: 90px; /* Account for music player height + bottom spacing */
+  margin-bottom: 90px;
 }
 
 .back-button {
@@ -453,10 +344,6 @@ button:focus-visible {
   align-items: center;
 }
 
-.back-button:hover {
-  background-color: #646cff;
-}
-
 .seasons-button {
   margin-bottom: 1rem;
   padding: 0.5rem 1rem;
@@ -466,10 +353,6 @@ button:focus-visible {
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.2s;
-}
-
-.seasons-button:hover {
-  background-color: #646cff;
 }
 
 .show-image-background {
@@ -521,26 +404,251 @@ button:focus-visible {
   line-height: 1.6;
 }
 
-/* Scrollbar styling for the description */
-.show-description-container p::-webkit-scrollbar {
-  width: 8px;
+/* ==========================================================================
+   Episode Components
+   ========================================================================== */
+.show-episodes {
+  height: calc(100vh - 180px);
+  padding: 2rem;
+  background-color: #1f1f1f;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 90px;
 }
 
-.show-description-container p::-webkit-scrollbar-track {
-  background: #1a1a1a;
+.show-episodes-nav {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.home-nav-button {
+  margin-left: 2rem;
+  padding: 0.5rem 1rem;
+  color: #646cff;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.home-nav-button:hover {
+  color: #535bf2;
+  background-color: transparent;
+}
+
+.add-remove-toggle-button {
+  font-size: 0.8rem;
+  padding: 0.3em 0.8em;
+  margin-left: auto;
+  align-self: flex-end;
+  white-space: nowrap;
+  min-width: fit-content;
+  background-color: #2a2a2a;
+  border: 1px solid #646cff;
+}
+
+.episode-card .show-info {
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+  color: #ddd;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  line-height: 1.4;
+}
+
+.episode-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0.5rem;
+}
+
+.episode-info-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.episode-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.episode-title {
+  font-size: 1.1rem;
+  margin: 0;
+  color: white;
+  flex: 1;
+}
+
+.episode-description {
+  font-size: 0.9rem;
+  color: #ddd;
+  margin: 0;
+  line-height: 1.4;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+}
+
+.episode-label {
+  color: white;
+  font-weight: 500;
+}
+
+.episode-favorite-button {
+  align-self: flex-end;
+  font-size: 0.8rem;
+  padding: 0.3em 0.8em;
+  white-space: nowrap;
+  min-width: fit-content;
+  background-color: #2a2a2a;
+  border: 1px solid #646cff;
+  cursor: pointer;
+}
+
+.episode-favorite-button:hover {
+  background-color: #646cff;
+  color: white;
+}
+
+/* ==========================================================================
+   Favorites Components
+   ========================================================================== */
+.favorites-container {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.favorites-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.favorites-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.favorite-card {
+  height: 120px;
+  background-color: #2a2a2a;
+  border: 1px solid #3a3a3a;
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.favorite-content {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
+  align-items: stretch;
+  padding: 0.5rem;
+  width: 100%;
+}
+
+.favorite-info-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  position: relative;
+}
+
+.favorite-info {
+  margin: 0.2rem 0;
+  font-size: 0.9rem;
+  color: #ddd;
+}
+
+.favorite-added-date {
+  margin: 0.2rem 0;
+  font-size: 0.8rem;
+  color: #ddd;
+}
+
+.favorite-remove-button {
+  align-self: center;
+  height: fit-content;
+  background-color: #2a2a2a;
+  border: 1px solid #646cff;
+  padding: 0.5rem 1rem;
+  white-space: nowrap;
+  color: white;
+  transition: all 0.2s ease;
+}
+
+.favorite-remove-button:hover {
+  background-color: #646cff;
+  color: white;
+}
+
+.favorite-title {
+  font-size: 1.1rem;
+  margin: 0;
+  color: white;
+  flex: 1;
+}
+
+.favorite-info {
+  margin: 0.2rem 0;
+  font-size: 0.9rem;
+  color: #ddd;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  line-height: 1.4;
+}
+
+.favorite-label {
+  color: white;
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   Interactive Elements
+   ========================================================================== */
+/* Buttons */
+.back-button,
+.seasons-button,
+.sort-button,
+.add-remove-toggle-button,
+.episode-favorite-button,
+.favorite-remove-button {
+  padding: 0.5rem 1rem;
+  background-color: #1a1a1a;
+  color: white;
+  border: 1px solid #646cff;
   border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #646cff;
+  }
 }
 
-.show-description-container p::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 4px;
-}
-
-.show-description-container p::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
-
-/* Responsive adjustments */
+/* ==========================================================================
+   Media Queries and Responsive Design
+   ========================================================================== */
 @media (max-width: 480px) {
   .show-details-nav {
     flex-direction: column;
@@ -568,25 +676,6 @@ button:focus-visible {
   flex: 1;
   overflow-y: auto;
   padding-right: 10px;
-}
-
-/* Scrollbar styling for seasons */
-.seasons-container::-webkit-scrollbar {
-  width: 8px;
-}
-
-.seasons-container::-webkit-scrollbar-track {
-  background: #1a1a1a;
-  border-radius: 4px;
-}
-
-.seasons-container::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 4px;
-}
-
-.seasons-container::-webkit-scrollbar-thumb:hover {
-  background: #555;
 }
 
 .season-select {
@@ -649,63 +738,12 @@ button:focus-visible {
 .add-remove-toggle-button {
   font-size: 0.8rem;
   padding: 0.3em 0.8em;
-  margin-left: auto; /* This will push the button to the right */
-  align-self: flex-end; /* Align to the end (right) of the flex container */
+  margin-left: auto;
+  align-self: flex-end;
   white-space: nowrap;
   min-width: fit-content;
   background-color: #2a2a2a;
   border: 1px solid #646cff;
-}
-
-.add-remove-toggle-button:hover {
-  background-color: #646cff;
-  color: white;
-}
-
-.episode-card {
-  cursor: default;
-}
-
-/* Favorite Episode Card Specific Styles */
-.show-card.episode-card {
-  height: 120px;
-  background-color: #2a2a2a;
-  border: 1px solid #3a3a3a;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.show-card.episode-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.show-card.episode-card .show-content {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 1rem;
-  align-items: center;
-  padding: 0.5rem;
-}
-
-.show-card.episode-card .show-info-container {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-}
-
-.show-card.episode-card .add-remove-toggle-button {
-  align-self: center;
-  height: fit-content;
-  background-color: #1a1a1a;
-  color: #646cff;
-  border: 1px solid #646cff;
-  padding: 0.5rem 1rem;
-  transition: all 0.2s ease;
-}
-
-.show-card.episode-card .add-remove-toggle-button:hover {
-  background-color: #646cff;
-  color: white;
 }
 
 .episode-card .show-info {
@@ -794,7 +832,7 @@ button:focus-visible {
 .favorites-grid {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1rem;
 }
 
 .favorite-card {
@@ -810,11 +848,6 @@ button:focus-visible {
   position: relative;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.favorite-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .favorite-content {
