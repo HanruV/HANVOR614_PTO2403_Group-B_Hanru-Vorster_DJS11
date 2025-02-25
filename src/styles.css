@@ -262,9 +262,15 @@ button:focus-visible {
   height: 100px;
   align-items: center;
   position: relative;
-  background-color: #1a1a1a;
+  background-color: #3a3a3a;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.show-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .card-sub-heading {
@@ -310,7 +316,7 @@ button:focus-visible {
 .show-info {
   margin: 0;
   font-size: 0.8rem;
-  color: #666;
+  color: #ddd;
 }
 
 .show-date {
@@ -608,16 +614,14 @@ button:focus-visible {
 }
 
 .show-episodes {
-  height: calc(
-    100vh - 180px
-  ); /* Account for header (60px), footer (30px), music player (60px), and padding (30px) */
+  height: calc(100vh - 180px);
   padding: 2rem;
   background-color: #1f1f1f;
   border-radius: 8px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  margin-bottom: 90px; /* Account for music player height + bottom spacing */
+  margin-bottom: 90px;
 }
 
 .show-episodes-nav {
@@ -664,7 +668,7 @@ button:focus-visible {
 
 /* Favorite Episode Card Specific Styles */
 .show-card.episode-card {
-  height: 120px; /* Slightly taller to accommodate content */
+  height: 120px;
   background-color: #2a2a2a;
   border: 1px solid #3a3a3a;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
