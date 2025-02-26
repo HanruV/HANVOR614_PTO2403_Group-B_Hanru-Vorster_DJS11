@@ -2,9 +2,11 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import SortButton from "../common/SortButton";
 import SortGenreButton from "../common/SortGenreButton";
+import SortByUpdatedButton from "../common/SortByUpdatedButton";
 import { GENRE_MAP } from "../../constants/genres";
 import { sortByTitle } from "../../sortFunctions/SortAZ";
-import { filterByGenre } from "../../functions/SortGenre";
+import { filterByGenre } from "../../sortFunctions/SortGenre";
+import { sortByLastUpdated } from "../../sortFunctions/SortLastUpdated";
 
 export default function ShowList() {
   const navigate = useNavigate();
@@ -18,6 +20,8 @@ export default function ShowList() {
   const [errorMessage, setErrorMessage] = useState(null); // Initialize error message state
   // State to track selected genre for filtering
   const [selectedGenre, setSelectedGenre] = useState("");
+  // State to track date sort order (newest or oldest)
+  const [dateOrder, setDateOrder] = useState("newest");
 
   // Fetch shows data when component mounts
   useEffect(() => {
@@ -39,6 +43,9 @@ export default function ShowList() {
 
     fetchShows();
   }, [sortOrder]);
+
+  // Apply genre filter to shows before rendering
+  const filteredShows = filterByGenre(shows, selectedGenre);
 
   // Sort the shows list based on the sort order
   const sortShows = (data, order) => {
@@ -67,8 +74,16 @@ export default function ShowList() {
     navigate(`/show/${showId}`);
   };
 
-  // Apply genre filter to shows before rendering
-  const filteredShows = filterByGenre(shows, selectedGenre);
+  // Function to toggle the date order of the shows list
+  const handleDateSortToggle = () => {
+    // Toggle between newest and oldest
+    const newOrder = dateOrder === "newest" ? "oldest" : "newest";
+    // Update the state with the new order
+    setDateOrder(newOrder);
+    // Sort the shows based on the new order and update state
+    const sortedShows = sortByLastUpdated(shows, newOrder);
+    setShows(sortedShows);
+  };
 
   return (
     <div>
@@ -76,6 +91,10 @@ export default function ShowList() {
         <h2>All Shows</h2>
         <div className="filter-controls">
           <SortButton currentOrder={sortOrder} onToggle={handleSortToggle} />
+          <SortByUpdatedButton
+            currentOrder={dateOrder}
+            onToggle={handleDateSortToggle}
+          />
           <SortGenreButton
             selectedGenre={selectedGenre}
             onGenreChange={handleGenreChange}
