@@ -4,6 +4,7 @@ import SortButton from "../common/SortButton";
 import SortGenreButton from "../common/SortGenreButton";
 import { GENRE_MAP } from "../../constants/genres";
 import { sortByTitle } from "../../sortFunctions/SortAZ";
+import { filterByGenre } from "../../functions/SortGenre";
 
 export default function ShowList() {
   const navigate = useNavigate();
@@ -15,6 +16,8 @@ export default function ShowList() {
   const [isLoading, setIsLoading] = useState(true); // Initialize loading state
   // State to track error message
   const [errorMessage, setErrorMessage] = useState(null); // Initialize error message state
+  // State to track selected genre for filtering
+  const [selectedGenre, setSelectedGenre] = useState("");
 
   // Fetch shows data when component mounts
   useEffect(() => {
@@ -52,6 +55,11 @@ export default function ShowList() {
     sortShows(shows, newOrder); // Sort the shows list based on the new order
   };
 
+  // Updates the selected genre when user makes a new selection
+  const handleGenreChange = (genre) => {
+    setSelectedGenre(genre);
+  };
+
   // Handler for show click events
   // Uses navigate to change routes
   const handleShowClick = (showId) => {
@@ -59,13 +67,19 @@ export default function ShowList() {
     navigate(`/show/${showId}`);
   };
 
+  // Apply genre filter to shows before rendering
+  const filteredShows = filterByGenre(shows, selectedGenre);
+
   return (
     <div>
       <div className="shows-header">
         <h2>All Shows</h2>
         <div className="filter-controls">
           <SortButton currentOrder={sortOrder} onToggle={handleSortToggle} />
-          <SortGenreButton selectedGenre="" />
+          <SortGenreButton
+            selectedGenre={selectedGenre}
+            onGenreChange={handleGenreChange}
+          />
         </div>
       </div>
       <div className="show-list-grid">
@@ -74,7 +88,7 @@ export default function ShowList() {
         ) : errorMessage ? (
           <p>{errorMessage}</p>
         ) : (
-          shows.map((show) => (
+          filteredShows.map((show) => (
             <div
               key={show.id}
               className="show-card"

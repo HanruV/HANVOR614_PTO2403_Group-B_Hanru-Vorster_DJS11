@@ -1,12 +1,12 @@
 import { GENRE_MAP } from "../../constants/genres";
 import PropTypes from "prop-types";
 
-// A dropdown select component for filtering shows by genre
-// Displays a list of available genres from GENRE_MAP
-export default function SortGenreButton({ selectedGenre }) {
+// A dropdown select component that displays all available genres
+// Allows users to filter shows by selecting a specific genre
+export default function SortGenreButton({ selectedGenre, onGenreChange }) {
+  // When a new genre is selected, pass the value to the parent component
   const handleChange = (event) => {
-    // Placeholder for now to fix the error
-    console.log(event.target.value);
+    onGenreChange(event.target.value);
   };
 
   return (
@@ -15,11 +15,10 @@ export default function SortGenreButton({ selectedGenre }) {
       onChange={handleChange}
       className="sort-genre-select"
     >
-      {/* Default option when no genre is selected */}
+      {/* Default option - shows all genres when selected */}
       <option value="">Genre</option>
 
-      {/* Map through GENRE_MAP to create an option for each genre */}
-      {/* Each genre has an ID (key) and an object containing title */}
+      {/* Create an option for each genre in GENRE_MAP */}
       {Object.entries(GENRE_MAP).map(([id, genre]) => (
         <option key={id} value={id}>
           {genre.title}
@@ -29,6 +28,8 @@ export default function SortGenreButton({ selectedGenre }) {
   );
 }
 
+// Type checking for component props
 SortGenreButton.propTypes = {
   selectedGenre: PropTypes.string.isRequired,
+  onGenreChange: PropTypes.func.isRequired,
 };
