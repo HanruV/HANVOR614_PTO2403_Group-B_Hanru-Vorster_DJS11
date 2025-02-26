@@ -1,6 +1,8 @@
 import { useState } from "react";
 import SortButton from "../common/SortButton";
+import SortDateAddedButton from "../common/SortDateAddedButton";
 import { sortByTitle } from "../../sortFunctions/SortAZ";
+import { sortByDateAdded } from "../../sortFunctions/SortDateAdded";
 
 export default function Favorites() {
   // Initialize favorites state from localStorage
@@ -9,8 +11,10 @@ export default function Favorites() {
     const storedFavorites = localStorage.getItem("podcastFavorites");
     return storedFavorites ? JSON.parse(storedFavorites) : [];
   });
-  // Sort order state
+  // Sort order state for episode title
   const [sortOrder, setSortOrder] = useState("asc");
+  // Sort order state for date added
+  const [dateOrder, setDateOrder] = useState("newest");
 
   // Removes a favorite episode by its ID
   // Updates both state and localStorage to maintain persistence
@@ -41,12 +45,27 @@ export default function Favorites() {
     setFavorites(sortedFavorites);
   };
 
+  // Handler for toggling date sort order
+  const handleDateSortToggle = () => {
+    // Toggle between newest and oldest
+    const newOrder = dateOrder === "newest" ? "oldest" : "newest";
+    // Update the state with the new order
+    setDateOrder(newOrder);
+    // Sort the favorites based on the new order and update state
+    const sortedFavorites = sortByDateAdded(favorites, newOrder);
+    setFavorites(sortedFavorites);
+  };
+
   return (
     <div className="favorites-container">
       <div className="favorites-header">
         <h2>Favorite Episodes</h2>
         <div className="filter-controls">
           <SortButton currentOrder={sortOrder} onToggle={handleSortToggle} />
+          <SortDateAddedButton
+            currentOrder={dateOrder}
+            onToggle={handleDateSortToggle}
+          />
         </div>
       </div>
       <div className="favorites-grid">

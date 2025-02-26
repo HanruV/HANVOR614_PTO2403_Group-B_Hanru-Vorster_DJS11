@@ -648,6 +648,34 @@ a:hover {
 }
 
 /* ==========================================================================
+   Sort Genre Button Styles
+   ========================================================================== */
+.sort-genre-select {
+  padding: 0.5rem 1rem;
+  background-color: #1a1a1a;
+  color: white;
+  border: 1px solid #646cff;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-size: 0.8 rem;
+  min-width: 200px;
+  height: 2.5em;
+  display: flex;
+  align-items: center;
+}
+
+.sort-genre-select:hover {
+  border-color: #535bf2;
+}
+
+.sort-genre-select:focus {
+  outline: none;
+  border-color: #535bf2;
+  box-shadow: 0 0 0 2px rgba(100, 108, 255, 0.3);
+}
+
+/* ==========================================================================
    Media Queries and Responsive Design
    ========================================================================== */
 @media (max-width: 480px) {
@@ -924,32 +952,4 @@ a:hover {
   display: flex;
   gap: 1rem;
   align-items: center;
-}
-
-/* ==========================================================================
-   Sort Genre Button Styles
-   ========================================================================== */
-.sort-genre-select {
-  padding: 0.5rem 1rem;
-  background-color: #1a1a1a;
-  color: white;
-  border: 1px solid #646cff;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-  font-size: 0.8 rem;
-  min-width: 200px;
-  height: 2.5em;
-  display: flex;
-  align-items: center;
-}
-
-.sort-genre-select:hover {
-  border-color: #535bf2;
-}
-
-.sort-genre-select:focus {
-  outline: none;
-  border-color: #535bf2;
-  box-shadow: 0 0 0 2px rgba(100, 108, 255, 0.3);
 }
