@@ -6,12 +6,16 @@
 
 **Table of Contents**
 
-- [🤖 Technology](#-technology)
-- [📦Data](#data)
-  - [Relationships](#relationships)
-  - [Endpoints](#endpoints)
-  - [Genre Titles](#genre-titles)
-- [🧑 User Stories](#user-stories)
+- [🎵 PODCAST APP | PORTFOLIO PIECE 💿](#-podcast-app--portfolio-piece-)
+	- [🤖 Technology](#-technology)
+	- [📦Data](#data)
+		- [Relationships](#relationships)
+		- [Endpoints](#endpoints)
+		- [Genre Titles](#genre-titles)
+	- [🧑 User Stories](#user-stories)
+- [CORE PROJECT REQUIREMENTS ✅](#core-project-requirements-)
+- [STRETCH GOALS 💪](#stretch-goals-)
+		- [Notes](#notes)
 
 ## 🤖 Technology
 
@@ -179,3 +183,7 @@ Please refer to the DJS rubric found in your dashboard spreadsheet for more deta
 | P3.50 |                     | User is able to filter shows based on title by means of a text input                                        | Hard       | 3     |
 | P3.51 |                     | User is able to find shows based on fuzzy matching of concepts                                              | Hard       | 3     |
 | P3.52 |                     | App displays the exact timestamp location of where they left off any episode                                | Hard       | 3     |
+
+### Notes
+
+documentation on audio player implementation: https://www.unclebigbay.com/blog/react-audio-player-implementation
