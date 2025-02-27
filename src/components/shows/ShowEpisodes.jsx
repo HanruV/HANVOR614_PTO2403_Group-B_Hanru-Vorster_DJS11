@@ -1,8 +1,9 @@
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import ShowEpisodesNav from "../navigation/ShowEpisodesNav";
+import PropTypes from "prop-types";
 
-export default function ShowEpisodes() {
+export default function ShowEpisodes({ onPlayEpisode }) {
   const location = useLocation();
   const navigate = useNavigate();
   const { id } = useParams();
@@ -101,6 +102,19 @@ export default function ShowEpisodes() {
     });
   };
 
+  // Function to handle episode play when an episode card is clicked
+  // This sends the episode data up to the parent App component
+  const handleEpisodePlay = (episode) => {
+    // Create a comprehensive episode object with all necessary metadata
+    onPlayEpisode({
+      title: episode.title,
+      description: episode.description,
+      file: episode.file,
+      showTitle: showTitle,
+      seasonTitle: selectedSeason?.title,
+    });
+  };
+
   return (
     <div className="show-episodes">
       <ShowEpisodesNav
@@ -121,7 +135,14 @@ export default function ShowEpisodes() {
           <h2>{selectedSeason?.title} - Episodes</h2>
           <div className="show-list-grid">
             {selectedSeason?.episodes.map((episode, index) => (
-              <div key={index} className="show-card episode-card">
+              <div
+                key={index}
+                className="show-card episode-card"
+                // Add click handler to play the episode when card is clicked
+                onClick={() => handleEpisodePlay(episode)}
+                // Add pointer cursor to indicate clickable element
+                style={{ cursor: "pointer" }}
+              >
                 <div className="episode-content">
                   <div className="episode-info-container">
                     <div className="episode-title-row">
@@ -129,6 +150,7 @@ export default function ShowEpisodes() {
                       <button
                         className="episode-favorite-button"
                         onClick={(e) => {
+                          // Stop event propagation to prevent triggering the parent's onClick
                           e.stopPropagation();
                           handleToggleFavorite(episode);
                         }}
@@ -157,3 +179,7 @@ export default function ShowEpisodes() {
     </div>
   );
 }
+
+ShowEpisodes.propTypes = {
+  onPlayEpisode: PropTypes.func.isRequired,
+};
