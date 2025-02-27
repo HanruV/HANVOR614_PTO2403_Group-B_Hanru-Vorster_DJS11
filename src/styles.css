@@ -96,9 +96,9 @@ a:hover {
   left: 0;
   width: 100%;
   background-color: black;
-  padding: 0.5rem;
+  padding: 1rem;
   z-index: 100;
-  height: 60px;
+  height: 75px;
 }
 
 /* Show Lists and Details Sections */
@@ -958,7 +958,7 @@ a:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1rem;
   width: 100%;
   max-width: 800px;
 }
@@ -967,12 +967,10 @@ a:hover {
   display: flex;
   gap: 0.5rem;
   color: white;
-}
-
-.now-playing {
-  font-weight: bold;
+  font-size: 1.1rem;
 }
 
 .audio-controls {
   width: 100%;
+  height: 45px;
 }
