@@ -20,6 +20,14 @@
   --transition-default: 0.2s ease;
 }
 
+/* Body styles with no side margins */
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
 /* ==========================================================================
    Typography and Links
    ========================================================================== */
@@ -52,6 +60,7 @@ a:hover {
   width: 100%;
   height: calc(100% - 60px);
   overflow: hidden;
+  padding: 0;
 }
 
 /* Shows Container Scrollbar Styling */
@@ -109,8 +118,7 @@ a:hover {
   flex-direction: column;
   gap: 1rem;
   padding: 1rem;
-  margin: 1rem;
-  margin-right: 0;
+  margin: 1rem 0 1rem 0;
   margin-bottom: calc(40px + 1rem);
   background-color: #1f1f1f;
   overflow-y: auto;
@@ -124,8 +132,7 @@ a:hover {
   flex-direction: column;
   gap: 1rem;
   padding: 1rem;
-  margin: 1rem;
-  margin-left: 0.5rem;
+  margin: 1rem 0 1rem 0;
   margin-bottom: calc(40px + 1rem);
   background-color: #1f1f1f;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
@@ -973,4 +980,155 @@ a:hover {
 .audio-controls {
   width: 100%;
   height: 45px;
+}
+
+/* Theme Button Styles */
+.theme-button {
+  padding: 0.5rem 1rem;
+  background-color: #1a1a1a;
+  color: white;
+  border: 1px solid #646cff;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-left: auto;
+  margin-right: 30px;
+  height: 2.5em;
+  display: flex;
+  align-items: center;
+}
+
+.theme-button:hover {
+  background-color: #646cff;
+}
+
+/* Light Theme Variables */
+.light-theme {
+  color-scheme: light;
+  color: rgba(0, 0, 0, 0.87);
+  background-color: #f5f5f5;
+  --primary-color: #535bf2;
+  --bg-dark: #e0e0e0;
+  --bg-darker: #d0d0d0;
+  --text-light: #333;
+  --card-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Light Theme Overrides */
+.light-theme .header,
+.light-theme .footer {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.light-theme .shows-and-favorites-container,
+.light-theme .all-show-details-container,
+.light-theme .show-details,
+.light-theme .show-episodes {
+  background-color: #d0d0d0;
+}
+
+.light-theme .show-card,
+.light-theme .episode-card,
+.light-theme .favorite-card {
+  background-color: #e8e8e8;
+  border: 1px solid #ccc;
+  color: #333;
+}
+
+.light-theme .show-content h3,
+.light-theme .show-title,
+.light-theme .episode-title,
+.light-theme .favorite-title {
+  color: #333;
+}
+
+.light-theme .show-info,
+.light-theme .episode-description,
+.light-theme .favorite-info {
+  color: #555;
+}
+
+.light-theme .sort-button,
+.light-theme .back-button,
+.light-theme .seasons-button,
+.light-theme .sort-genre-select,
+.light-theme .season-select,
+.light-theme .episode-favorite-button,
+.light-theme .favorite-remove-button,
+.light-theme .theme-button {
+  background-color: #e0e0e0;
+  color: #333;
+  border: 1px solid #535bf2;
+}
+
+.light-theme .home-nav-button {
+  color: #535bf2;
+}
+
+.light-theme .player-container {
+  background-color: #d0d0d0;
+}
+
+.light-theme .episode-info {
+  color: #333;
+}
+
+/* Light Theme Card Sub-Heading Overrides */
+.light-theme .card-sub-heading,
+.light-theme .episode-label,
+.light-theme .favorite-label {
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+/* Make sure other text elements in cards are properly colored in light theme */
+.light-theme .show-info,
+.light-theme .episode-description,
+.light-theme .favorite-info,
+.light-theme .favorite-added-date {
+  color: #333;
+}
+
+.light-theme .sort-button:hover,
+.light-theme .back-button:hover,
+.light-theme .seasons-button:hover,
+.light-theme .sort-genre-select:hover,
+.light-theme .season-select:hover,
+.light-theme .episode-favorite-button:hover,
+.light-theme .favorite-remove-button:hover,
+.light-theme .theme-button:hover,
+.light-theme .add-remove-toggle-button:hover {
+  background-color: #535bf2;
+  color: white;
+}
+
+/* Light Theme Box Shadow Overrides */
+.light-theme .header {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.light-theme .footer {
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.light-theme .shows-and-favorites-container,
+.light-theme .all-show-details-container {
+  box-shadow: 2px 2px 4px rgba(200, 200, 200, 0.3);
+}
+
+.light-theme .show-card,
+.light-theme .episode-card,
+.light-theme .favorite-card {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.light-theme .show-card:hover,
+.light-theme .episode-card:hover,
+.light-theme .favorite-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.light-theme .player-container {
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
 }

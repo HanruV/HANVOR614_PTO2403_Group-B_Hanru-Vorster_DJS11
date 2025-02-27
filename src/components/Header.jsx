@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import MainHeaderNav from "./navigation/MainHeaderNav";
+import ThemeSwitchButton from "./common/ThemeSwitchButton";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ export default function Header() {
         MyListeningPod
       </h1>
       <MainHeaderNav />
+      <ThemeSwitchButton />
     </header>
   );
 }
