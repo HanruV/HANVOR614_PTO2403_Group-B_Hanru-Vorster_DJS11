@@ -28,7 +28,10 @@ function App() {
       <main className="main-content">
         <Routes>
           <Route path="/" element={<ShowsSection />} />
-          <Route path="/favorites" element={<ShowsSection />} />
+          <Route
+            path="/favorites"
+            element={<ShowsSection onPlayEpisode={handlePlayEpisode} />}
+          />
           <Route path="/show/:id" element={<ShowDetails />} />
           <Route path="/show/:id/seasons" element={<ShowSeasons />} />
           <Route

@@ -3,8 +3,9 @@ import SortButton from "../common/SortButton";
 import SortDateAddedButton from "../common/SortDateAddedButton";
 import { sortByTitle } from "../../sortFunctions/SortAZ";
 import { sortByDateAdded } from "../../sortFunctions/SortDateAdded";
+import PropTypes from "prop-types";
 
-export default function Favorites() {
+export default function Favorites({ onPlayEpisode }) {
   // Initialize favorites state from localStorage
   // If no favorites exist in localStorage, initialize with empty array
   const [favorites, setFavorites] = useState(() => {
@@ -18,7 +19,10 @@ export default function Favorites() {
 
   // Removes a favorite episode by its ID
   // Updates both state and localStorage to maintain persistence
-  const handleRemoveFavorite = (favoriteId) => {
+  const handleRemoveFavorite = (e, favoriteId) => {
+    // Stop event propagation to prevent triggering the parent's onClick
+    e.stopPropagation();
+
     setFavorites((prevFavorites) => {
       const newFavorites = prevFavorites.filter((fav) => fav.id !== favoriteId);
       localStorage.setItem("podcastFavorites", JSON.stringify(newFavorites));
@@ -56,6 +60,20 @@ export default function Favorites() {
     setFavorites(sortedFavorites);
   };
 
+  // Function to handle episode play when a favorite card is clicked
+  const handleEpisodePlay = (favorite) => {
+    if (onPlayEpisode) {
+      // Create a comprehensive episode object with all necessary metadata
+      onPlayEpisode({
+        title: favorite.episode.title,
+        description: favorite.episode.description,
+        file: favorite.episode.file,
+        showTitle: favorite.showTitle,
+        seasonTitle: favorite.seasonTitle,
+      });
+    }
+  };
+
   return (
     <div className="favorites-container">
       <div className="favorites-header">
@@ -73,7 +91,12 @@ export default function Favorites() {
           <p>No favorite episodes yet</p>
         ) : (
           favorites.map((favorite) => (
-            <div key={favorite.id} className="favorite-card">
+            <div
+              key={favorite.id}
+              className="favorite-card"
+              onClick={() => handleEpisodePlay(favorite)}
+              style={{ cursor: "pointer" }}
+            >
               <div className="favorite-content">
                 <div className="favorite-info-container">
                   <h3 className="favorite-title">{favorite.episode.title}</h3>
@@ -92,7 +115,7 @@ export default function Favorites() {
                 </div>
                 <button
                   className="favorite-remove-button"
-                  onClick={() => handleRemoveFavorite(favorite.id)}
+                  onClick={(e) => handleRemoveFavorite(e, favorite.id)}
                 >
                   Remove from Favorites
                 </button>
@@ -104,3 +127,8 @@ export default function Favorites() {
     </div>
   );
 }
+
+// Add PropTypes validation
+Favorites.propTypes = {
+  onPlayEpisode: PropTypes.func,
+};
