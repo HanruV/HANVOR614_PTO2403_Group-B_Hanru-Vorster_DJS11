@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import SortButton from "../common/SortButton";
 import SortGenreButton from "../common/SortGenreButton";
-import SortByUpdatedButton from "../common/SortByUpdatedButton";
+import SortByUpdatedButton from "../common/SortbyUpdatedButton";
 import { GENRE_MAP } from "../../constants/genres";
 import { sortByTitle } from "../../sortFunctions/SortAZ";
 import { filterByGenre } from "../../sortFunctions/SortGenre";
