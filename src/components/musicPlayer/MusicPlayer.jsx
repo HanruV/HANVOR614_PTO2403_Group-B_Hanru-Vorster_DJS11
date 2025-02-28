@@ -1,3 +1,4 @@
+// A component for playing audio episodes
 import PropTypes from "prop-types";
 import { useEffect, useRef } from "react";
 
@@ -6,7 +7,6 @@ export default function MusicPlayer({ currentEpisode }) {
   const audioRef = useRef();
 
   // Default audio URL if no episode is selected
-  // This ensures the audio player always has a valid source
   const audioUrl =
     currentEpisode?.file ||
     "https://podcast-api.netlify.app/placeholder-audio.mp3";

@@ -1,3 +1,4 @@
+// A button component for toggling between light and dark themes
 import { useState, useEffect } from "react";
 
 export default function ThemeSwitchButton() {

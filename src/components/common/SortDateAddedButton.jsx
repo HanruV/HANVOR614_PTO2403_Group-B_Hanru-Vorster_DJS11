@@ -1,8 +1,7 @@
+// Displays "Sort Latest" when showing newest first
+// Displays "Sort Oldest" when showing oldest first
 import PropTypes from "prop-types";
 
-// Button component for toggling date sort order in favorites list
-// Displays "Latest" when showing newest first
-// Displays "Oldest" when showing oldest first
 export default function SortDateAddedButton({ currentOrder, onToggle }) {
   return (
     <button onClick={onToggle} className="sort-button">
@@ -12,8 +11,7 @@ export default function SortDateAddedButton({ currentOrder, onToggle }) {
   );
 }
 
-// Type checking for component props
 SortDateAddedButton.propTypes = {
-  currentOrder: PropTypes.oneOf(["newest", "oldest"]).isRequired, // currentOrder must be 'newest' or 'oldest'
-  onToggle: PropTypes.func.isRequired, // onToggle must be a function
+  currentOrder: PropTypes.oneOf(["newest", "oldest"]).isRequired,
+  onToggle: PropTypes.func.isRequired,
 };

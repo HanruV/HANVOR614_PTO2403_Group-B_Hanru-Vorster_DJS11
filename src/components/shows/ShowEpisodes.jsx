@@ -1,3 +1,4 @@
+// A component for displaying show episodes
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import ShowEpisodesNav from "../navigation/ShowEpisodesNav";
@@ -105,7 +106,6 @@ export default function ShowEpisodes({ onPlayEpisode }) {
   // Function to handle episode play when an episode card is clicked
   // This sends the episode data up to the parent App component
   const handleEpisodePlay = (episode) => {
-    // Create a comprehensive episode object with all necessary metadata
     onPlayEpisode({
       title: episode.title,
       description: episode.description,
@@ -150,7 +150,6 @@ export default function ShowEpisodes({ onPlayEpisode }) {
                       <button
                         className="episode-favorite-button"
                         onClick={(e) => {
-                          // Stop event propagation to prevent triggering the parent's onClick
                           e.stopPropagation();
                           handleToggleFavorite(episode);
                         }}

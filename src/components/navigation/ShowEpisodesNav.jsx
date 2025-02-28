@@ -1,3 +1,4 @@
+// A navigation component for the show episodes page
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 
@@ -9,7 +10,6 @@ export default function ShowEpisodesNav({
   isLoading,
   error,
 }) {
-  // Hook to navigate programmatically
   const navigate = useNavigate();
 
   const handleBack = () => {

@@ -1,7 +1,4 @@
-// New reusable button component for toggling sort order
-// Accepts currentOrder prop ('asc' or 'desc') and onToggle callback
 // Displays "Sort Z-A" when ascending, "Sort A-Z" when descending
-
 import PropTypes from "prop-types";
 
 export default function SortButton({
@@ -16,8 +13,7 @@ export default function SortButton({
   );
 }
 
-// PropTypes for type checking
 SortButton.propTypes = {
-  currentOrder: PropTypes.oneOf(["asc", "desc"]).isRequired, // currentOrder must be 'asc' or 'desc'
-  onToggle: PropTypes.func.isRequired, // onToggle must be a function
+  currentOrder: PropTypes.oneOf(["asc", "desc"]).isRequired,
+  onToggle: PropTypes.func.isRequired,
 };

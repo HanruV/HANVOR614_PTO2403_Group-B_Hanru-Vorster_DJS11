@@ -1,8 +1,8 @@
+// A navigation component for the show seasons page
 import { useNavigate, useParams } from "react-router-dom";
 import PropTypes from "prop-types";
 
 export default function ShowSeasonsNav() {
-  // Hook to navigate programmatically
   const navigate = useNavigate();
   // Extracting the show ID from URL parameters
   const { id } = useParams();

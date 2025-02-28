@@ -1,3 +1,4 @@
+// A component for displaying show seasons
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import ShowSeasonsNav from "../navigation/ShowSeasonsNav";
@@ -5,10 +6,14 @@ import ShowSeasonsNav from "../navigation/ShowSeasonsNav";
 export default function ShowSeasons() {
   const navigate = useNavigate();
   const { id } = useParams();
+  // State to store the seasons data
   const [seasons, setSeasons] = useState([]);
+  // State to track loading status
   const [isLoading, setIsLoading] = useState(true);
+  // State to track error message
   const [error, setError] = useState(null);
 
+  // Fetch seasons data when component mounts or show ID changes
   useEffect(() => {
     const fetchSeasons = async () => {
       try {
@@ -31,6 +36,8 @@ export default function ShowSeasons() {
     fetchSeasons();
   }, [id]);
 
+  // Handler for season click events
+  // Uses navigate to change routes
   const handleSeasonClick = async (season) => {
     navigate(`/show/${id}/season/${season.season}`, { state: { season } });
   };

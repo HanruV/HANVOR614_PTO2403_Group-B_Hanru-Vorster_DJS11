@@ -1,3 +1,4 @@
+// A navigation component for the show details page
 import PropTypes from "prop-types";
 import { useNavigate, useParams } from "react-router-dom";
 

@@ -1,3 +1,4 @@
+// A component for displaying show details
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import ShowDetailsNav from "../navigation/ShowDetailsNav";

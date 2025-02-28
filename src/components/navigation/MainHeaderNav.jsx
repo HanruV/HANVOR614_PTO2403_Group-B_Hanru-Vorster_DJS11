@@ -1,3 +1,4 @@
+// A navigation component for the main header
 import { Link } from "react-router-dom";
 
 export default function MainHeaderNav() {

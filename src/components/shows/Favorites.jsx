@@ -1,3 +1,4 @@
+// A component for displaying favorite episodes
 import { useState } from "react";
 import SortButton from "../common/SortButton";
 import SortDateAddedButton from "../common/SortDateAddedButton";
@@ -20,7 +21,6 @@ export default function Favorites({ onPlayEpisode }) {
   // Removes a favorite episode by its ID
   // Updates both state and localStorage to maintain persistence
   const handleRemoveFavorite = (e, favoriteId) => {
-    // Stop event propagation to prevent triggering the parent's onClick
     e.stopPropagation();
 
     setFavorites((prevFavorites) => {
@@ -51,11 +51,10 @@ export default function Favorites({ onPlayEpisode }) {
 
   // Handler for toggling date sort order
   const handleDateSortToggle = () => {
-    // Toggle between newest and oldest
     const newOrder = dateOrder === "newest" ? "oldest" : "newest";
-    // Update the state with the new order
+
     setDateOrder(newOrder);
-    // Sort the favorites based on the new order and update state
+
     const sortedFavorites = sortByDateAdded(favorites, newOrder);
     setFavorites(sortedFavorites);
   };
@@ -63,7 +62,6 @@ export default function Favorites({ onPlayEpisode }) {
   // Function to handle episode play when a favorite card is clicked
   const handleEpisodePlay = (favorite) => {
     if (onPlayEpisode) {
-      // Create a comprehensive episode object with all necessary metadata
       onPlayEpisode({
         title: favorite.episode.title,
         description: favorite.episode.description,
@@ -128,7 +126,6 @@ export default function Favorites({ onPlayEpisode }) {
   );
 }
 
-// Add PropTypes validation
 Favorites.propTypes = {
   onPlayEpisode: PropTypes.func,
 };
