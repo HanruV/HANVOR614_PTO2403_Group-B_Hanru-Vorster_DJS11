@@ -1,6 +1,5 @@
 import { useLocation } from "react-router-dom";
 import ShowList from "./ShowList";
-import SuggestedShows from "./SuggestedShows";
 import Favorites from "./Favorites";
 import PropTypes from "prop-types";
 
@@ -16,9 +15,6 @@ const ShowsSection = ({ onPlayEpisode }) => {
         ) : (
           <ShowList />
         )}
-      </div>
-      <div className="all-show-details-container">
-        <SuggestedShows />
       </div>
     </section>
   );

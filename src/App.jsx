@@ -17,7 +17,6 @@ function App() {
   // Function to handle episode playback requests from child components
   // This function is passed down to ShowEpisodes as a prop
   const handlePlayEpisode = (episode) => {
-    // Update the state with the selected episode
     setCurrentEpisode(episode);
   };
 

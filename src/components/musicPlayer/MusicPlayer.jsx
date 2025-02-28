@@ -11,8 +11,7 @@ export default function MusicPlayer({ currentEpisode }) {
     currentEpisode?.file ||
     "https://podcast-api.netlify.app/placeholder-audio.mp3";
 
-  // Format the display title with show and season information
-  // Shows a default message if no episode is currently selected
+  // Displaying show information
   const episodeTitle = currentEpisode
     ? `${currentEpisode.title} (${currentEpisode.showTitle} - ${currentEpisode.seasonTitle})`
     : "No episode selected";
@@ -20,7 +19,6 @@ export default function MusicPlayer({ currentEpisode }) {
   // Set up beforeunload event listener
   useEffect(() => {
     const handleBeforeUnload = (event) => {
-      // Check if audio is currently playing
       if (audioRef.current && !audioRef.current.paused) {
         const message = "Audio is playing. Are you sure you want to leave?";
         event.preventDefault();
@@ -29,17 +27,13 @@ export default function MusicPlayer({ currentEpisode }) {
       }
     };
 
-    // Attach a 'beforeunload' event listener to the window object to prompt the user
-    // with a warning message if they attempt to leave the page while audio is playing.
     window.addEventListener("beforeunload", handleBeforeUnload);
 
     // Clean up event listener when component unmounts
-    // to prevent the event listener to not remain active
-    // after the component is no longer in use.
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
-  }, []); // We use the ref so the dependency array is empty
+  }, []); // Use the ref so the dependency array is empty
 
   return (
     <div className="audio-player">
