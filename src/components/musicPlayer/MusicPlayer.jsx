@@ -19,10 +19,12 @@ export default function MusicPlayer({ currentEpisode }) {
 
   // Set up beforeunload event listener
   useEffect(() => {
-    const handleBeforeUnload = () => {
+    const handleBeforeUnload = (event) => {
       // Check if audio is currently playing
       if (audioRef.current && !audioRef.current.paused) {
         const message = "Audio is playing. Are you sure you want to leave?";
+        event.preventDefault();
+        event.returnValue = message;
         return message;
       }
     };
@@ -50,9 +52,6 @@ export default function MusicPlayer({ currentEpisode }) {
         src={audioUrl}
         controls
         className="audio-controls"
-        // Automatically play when a new episode is selected
-        // The !! converts currentEpisode to a boolean value
-        autoPlay={!!currentEpisode}
       />
     </div>
   );
